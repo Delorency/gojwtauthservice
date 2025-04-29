@@ -9,6 +9,10 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+
+	v "auth/internal/validator"
+
+	"github.com/go-playground/validator"
 )
 
 func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
@@ -24,7 +28,20 @@ func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 		ah.logger.Println(l.GetLogEntry(r, http.StatusInternalServerError, bodyBytes))
 		return
 	}
+	if err := validator.New().Struct(req); err != nil {
+		data, f := v.HandleValidationErrors(w, err)
+		if f {
+			response.NewResponse(
+				data,
+				http.StatusBadRequest,
+				w,
+			)
+			ah.logger.Println(l.GetLogEntry(r, http.StatusBadRequest, bodyBytes))
+			return
+		}
+	}
 	ip, _ := tools.GetIp(r)
 
 	req.Ip = ip
+	req.UserAgent = r.UserAgent()
 }
