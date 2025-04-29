@@ -1,16 +1,21 @@
 package authdb
 
-import "auth/internal/schemes"
+import (
+	"auth/internal/models"
+	"auth/internal/schemes"
+)
 
 func (ad *authDB) Create(data *schemes.AccessCreate) (string, error) {
-	user, err := ad.userdb.GetUserById(data.UserID)
-	if err != nil {
-		return "", err
+	obj := &models.RefreshToken{
+		Jti:          data.Jti,
+		UserAgent:    data.UserAgent,
+		Refresh:      data.Refresh,
+		ExpiredAt:    data.ExpiredAt,
+		Ip:           data.Ip,
+		TokenVersion: data.TokenVersion,
+		UserID:       data.UserID,
 	}
-
-	data.TokenVersion = user.TokenVersion
-
-	err = ad.db.Create(data).Error
+	err := ad.db.Create(obj).Error
 	if err != nil {
 		return "", err
 	}

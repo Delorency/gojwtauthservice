@@ -2,13 +2,16 @@ package authdb
 
 import (
 	userdb "auth/internal/DB/userDB"
+	"auth/internal/models"
 	"auth/internal/schemes"
 
 	"gorm.io/gorm"
 )
 
 type AuthDBI interface {
-	Access(*schemes.AccessCreate) (string, error)
+	AuthorizedUserAgent(uint, string) (*models.RefreshToken, bool, error)
+	Create(*schemes.AccessCreate) (string, error)
+	Update(*models.RefreshToken) error
 }
 
 type authDB struct {

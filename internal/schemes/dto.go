@@ -16,3 +16,8 @@ type AccessResponse struct {
 	AccessToken  string `json:"access_token"`
 	RefreshToken string `json:"refresh_token"`
 }
+
+type RefreshRequest struct {
+	Refresh string `json:"refresh"`
+	Ip      string `json:"ip"`
+}

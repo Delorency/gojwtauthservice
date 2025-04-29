@@ -6,8 +6,8 @@ import (
 	"github.com/google/uuid"
 )
 
-func GetJWTToken() string {
-	return ""
+func GetJWTToken() (string, error) {
+	return "", nil
 }
 
 func EncodeToBase64() string {

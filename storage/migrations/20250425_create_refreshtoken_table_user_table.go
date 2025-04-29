@@ -9,9 +9,9 @@ import (
 
 func CreateRefreshTokenTable() *gormigrate.Migration {
 	return &gormigrate.Migration{
-		ID: "20250425_create_refreshtoken_table",
+		ID: "20250425_create_refreshtoken_table_user_table",
 		Migrate: func(tx *gorm.DB) error {
-			return tx.AutoMigrate(&models.RefreshToken{})
+			return tx.AutoMigrate(&models.RefreshToken{}, &models.User{})
 		},
 		Rollback: func(tx *gorm.DB) error {
 			return tx.Migrator().DropTable(models.RefreshToken{}.TableName())

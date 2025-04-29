@@ -24,9 +24,9 @@ func (ah *authHandler) Access(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	ip, err := tools.GetIp(r)
-	if err != nil || guid <= 0 {
+	if err != nil {
 		response.NewResponse(
-			e.NewError(""),
+			e.NewError("Ошибка парсинга IP"),
 			http.StatusInternalServerError,
 			w,
 		)
@@ -36,7 +36,6 @@ func (ah *authHandler) Access(w http.ResponseWriter, r *http.Request) {
 	ac := schemes.AccessCreate{UserID: uint(guid), UserAgent: r.UserAgent(), Ip: ip}
 
 	ar, err := ah.service.Access(&ac)
-
 	if err != nil {
 		response.NewResponse(
 			e.NewError("Ошибка создания токена"),

@@ -21,7 +21,7 @@ type Container struct {
 func NewContainer(db *gorm.DB, cfg *config.ConfigJWTToken) *Container {
 	userrepo := userdb.NewUserDB(db)
 	authrepo := authdb.NewAuthDB(db, userrepo)
-	authservice := service.NewAuthService(authrepo, cfg)
+	authservice := service.NewAuthService(authrepo, userrepo, cfg)
 
 	return &Container{
 		AuthRepo:    authrepo,

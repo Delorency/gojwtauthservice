@@ -26,7 +26,7 @@ func NewRouter(cont *container.Container, logger *log.Logger) *chi.Mux {
 
 	// router.Get("/swagger/*", httpSwagger.WrapHandler)
 
-	router.Post("/person/{id}", handlers.Access)
+	router.Post("/access/{guid}", handlers.Access)
 	router.Post("/refresh", handlers.Refresh)
 
 	return router

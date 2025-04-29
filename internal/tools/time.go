@@ -12,3 +12,7 @@ func GetDuration(lifetime string) time.Duration {
 	}
 	return d
 }
+
+func CheckExpire(t time.Time) bool {
+	return time.Now().After(t)
+}
