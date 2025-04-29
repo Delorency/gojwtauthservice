@@ -1,0 +1,24 @@
+
+2025/04/29 16:20:27 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[2.936ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/29 16:20:27 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.529ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20240425_create_refreshtoken_table'
+
+2025/04/29 16:20:37 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[3.171ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/29 16:20:37 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.653ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20240425_create_refreshtoken_table'
+
+2025/04/29 16:20:52 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[4.211ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/29 16:20:52 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.731ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20240425_create_refreshtoken_table'
+
+2025/04/29 16:35:42 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[2.474ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/29 16:35:42 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.430ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20240425_create_refreshtoken_table'
