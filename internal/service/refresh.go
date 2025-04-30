@@ -5,7 +5,6 @@ import (
 	"auth/internal/tools"
 	"fmt"
 	"strings"
-	"time"
 )
 
 func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessResponse, error) {
@@ -15,34 +14,29 @@ func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessRes
 		return nil, fmt.Errorf("")
 	}
 
-	obj, err := as.repo.AuthorizedUserToken(data.Refresh, data.UserAgent)
-
-	if err != nil {
-		return nil, err
+	parts := strings.Split(data.Access, ".")
+	payload, f := tools.GetTokenPayload(parts[1])
+	if !f {
+		return nil, fmt.Errorf("")
 	}
 
-	if obj.Ip != data.Ip {
+	if payload.Ip != data.Ip {
 		tools.SendMail(
-			obj.User.Email,
+			payload.Email,
 			"Warning",
 			"Вход с IP: "+data.Ip+" устройство: "+data.UserAgent,
 			as.smtp,
 		)
 	}
 
-	// refresh просрочен?
-	if !time.Now().Before((obj.ExpiredAt)) {
-		return nil, fmt.Errorf("")
+	obj, err := as.repo.AuthorizedUserToken(data.Refresh, data.UserAgent)
+
+	if err != nil {
+		return nil, err
 	}
 
 	// совпадает ли версия токена с последней версией
 	if obj.User.TokenVersion != obj.TokenVersion {
-		return nil, fmt.Errorf("")
-	}
-
-	parts := strings.Split(data.Access, ".")
-	payload, f := tools.GetTokenPayload(parts[1])
-	if !f {
 		return nil, fmt.Errorf("")
 	}
 
@@ -52,7 +46,7 @@ func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessRes
 	}
 
 	// новый access токен
-	access, err := tools.GetJWTToken(as.cfg, obj.Jti)
+	access, err := tools.GetJWTToken(as.cfg, obj.Jti, obj.Ip, obj.User.Email)
 	if err != nil {
 		return nil, err
 	}

@@ -19,15 +19,17 @@ type Header struct {
 	Alg  string
 }
 type Payload struct {
-	Iss string
-	Jti string
-	Iat int64
-	Exp int64
+	Iss   string
+	Jti   string
+	Iat   int64
+	Exp   int64
+	Ip    string
+	Email string
 }
 
-func GetJWTToken(cfg *config.ConfigJWTToken, jti string) (string, error) {
+func GetJWTToken(cfg *config.ConfigJWTToken, jti string, ip string, email string) (string, error) {
 	header := Header{Type: cfg.Typ, Alg: cfg.Alg}
-	payload := Payload{Iss: cfg.Iss, Iat: time.Now().Unix(), Exp: time.Now().Add(cfg.Atl).Unix(), Jti: jti}
+	payload := Payload{Iss: cfg.Iss, Iat: time.Now().Unix(), Exp: time.Now().Add(cfg.Atl).Unix(), Jti: jti, Ip: ip, Email: email}
 
 	header_byte, err := json.Marshal(header)
 	if err != nil {

@@ -33,7 +33,7 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 			return nil, err
 		}
 
-		access, err := tools.GetJWTToken(as.cfg, data.Jti)
+		access, err := tools.GetJWTToken(as.cfg, data.Jti, data.Ip, user.Email)
 		if err != nil {
 			return nil, err
 		}
@@ -54,7 +54,7 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 			return nil, err
 		}
 
-		access, err := tools.GetJWTToken(as.cfg, obj.Jti)
+		access, err := tools.GetJWTToken(as.cfg, data.Jti, data.Ip, obj.User.Email)
 		if err != nil {
 			return nil, err
 		}
