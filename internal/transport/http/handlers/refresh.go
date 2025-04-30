@@ -16,6 +16,16 @@ import (
 )
 
 func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
+	token, err := tools.GetAuthHeader(r)
+	if err != nil {
+		response.NewResponse(
+			e.NewError("Валидный токен не найден"),
+			http.StatusUnauthorized,
+			w,
+		)
+		ah.logger.Println(l.GetLogEntry(r, http.StatusUnauthorized, []byte{}))
+		return
+	}
 	bodyBytes, _ := io.ReadAll(r.Body)
 	var req schemes.RefreshRequest
 
@@ -54,19 +64,7 @@ func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 	req.Ip = ip
 	req.UserAgent = r.UserAgent()
 
-	token, err := tools.GetAuthHeader(r)
-	if err != nil {
-		response.NewResponse(
-			e.NewError("Валидный токен не найден"),
-			http.StatusUnauthorized,
-			w,
-		)
-		ah.logger.Println(l.GetLogEntry(r, http.StatusUnauthorized, []byte{}))
-		return
-	}
 	req.Access = token
-
-	ah.service.Refresh(&req)
 
 	ar, err := ah.service.Refresh(&req)
 	if err != nil {

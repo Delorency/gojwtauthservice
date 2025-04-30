@@ -56,4 +56,4 @@ func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessRes
 		AccessToken:  access,
 		RefreshToken: data.Refresh,
 	}, nil
-}
+} // ZGRkMWQ1MTctYmMzNS00ZDQ3LWFjYzMtYWFkZmYwNWZiNzhi

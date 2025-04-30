@@ -85,3 +85,339 @@
 
 2025/04/30 17:32:40 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
 [0.467ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 18:10:26 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[3.237ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 18:10:26 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.488ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 18:10:49 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.349ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:10:49 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[1.513ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and user_id = 1) AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:10:49 /home/delorency/work/gojwtauthservice/internal/DB/authDB/update.go:12
+[5.157ms] [rows:1] UPDATE "refreshtoken" SET "id"=8,"created_at"='2025-04-29 20:51:57.817',"updated_at"='2025-04-30 18:10:49.473',"jti"='192f7517-ccbe-4c4b-8267-5a7d3fac2b78',"user_agent"='PostmanRuntime/7.37.3',"refresh"='MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi',"expired_at"='2025-05-30 18:10:49.472',"ip"='127.0.0.1',"token_version"='v1',"user_id"=1 WHERE "refreshtoken"."deleted_at" IS NULL AND "id" = 8
+
+2025/04/30 18:11:49 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.323ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:11:49 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[1.394ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:11:49 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.366ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:11:49 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.908ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:14:07 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[2.440ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 18:14:07 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.459ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 18:14:23 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[2.506ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 18:14:23 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.373ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 18:15:07 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.405ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:15:07 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[1.528ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:15:07 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.149ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:15:07 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.402ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:16:43 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.126ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:16:43 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.545ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:16:43 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.119ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:16:43 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.338ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:16:59 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[2.595ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 18:16:59 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.494ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 18:17:00 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.457ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:17:00 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[2.025ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:17:11 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[2.474ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 18:17:11 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.379ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 18:17:12 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.458ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:17:12 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[2.105ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:18:15 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[2.547ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 18:18:15 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.393ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 18:18:19 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.420ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:18:19 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[1.648ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:19:04 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[2.533ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 18:19:04 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.394ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 18:19:06 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.603ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:19:06 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[2.722ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:19:18 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[4.279ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 18:19:18 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.765ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 18:19:21 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.420ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:19:21 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[1.957ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:20:16 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[2.553ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 18:20:16 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.392ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 18:20:17 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.303ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:20:17 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[1.453ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:21:59 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[2.472ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 18:21:59 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.397ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 18:22:02 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.377ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:22:02 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[1.468ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:22:08 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.121ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:22:08 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.572ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:22:09 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.164ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:22:09 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.700ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:22:11 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.140ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:22:11 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.539ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:22:17 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.153ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:22:17 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.669ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:22:18 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.441ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:22:18 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[1.631ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:22:22 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.123ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:22:22 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.545ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:22:29 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.092ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:22:29 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.446ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:22:42 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.122ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:22:42 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.560ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:22:49 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.138ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:22:49 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.564ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:23:40 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.118ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:23:40 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.541ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:24:04 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.096ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:24:04 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.431ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:24:12 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.147ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:24:12 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.921ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:25:10 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[2.397ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 18:25:10 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.362ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 18:25:14 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.557ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:25:14 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[1.714ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:26:28 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.187ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:26:28 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.766ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'MmFlY2U4NGItMjliZC00ZDlhLTkwNWQtNzg4MjhkMDkwNTJi') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:27:21 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.302ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:27:21 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.905ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and user_id = 1) AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:27:27 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.133ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:27:27 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.569ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and user_id = 1) AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:28:13 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.123ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:28:13 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.592ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and user_id = 1) AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:28:13 /home/delorency/work/gojwtauthservice/internal/DB/authDB/update.go:12
+[0.988ms] [rows:1] UPDATE "refreshtoken" SET "id"=8,"created_at"='2025-04-29 20:51:57.817',"updated_at"='2025-04-30 18:28:13.289',"jti"='3350e6f3-7b76-4c16-bc96-5a1da5634850',"user_agent"='PostmanRuntime/7.37.3',"refresh"='ZGRkMWQ1MTctYmMzNS00ZDQ3LWFjYzMtYWFkZmYwNWZiNzhi',"expired_at"='2025-05-30 18:28:13.289',"ip"='127.0.0.1',"token_version"='v2',"user_id"=1 WHERE "refreshtoken"."deleted_at" IS NULL AND "id" = 8
+
+2025/04/30 18:28:28 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.193ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:28:28 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.665ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and user_id = 1) AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:28:55 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.134ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:28:55 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.633ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and user_id = 1) AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:28:55 /home/delorency/work/gojwtauthservice/internal/DB/authDB/update.go:12
+[2.702ms] [rows:1] UPDATE "refreshtoken" SET "id"=8,"created_at"='2025-04-29 20:51:57.817',"updated_at"='2025-04-30 18:28:55.77',"jti"='90738b35-2cfa-4161-b7c6-21dc83403fa5',"user_agent"='PostmanRuntime/7.37.3',"refresh"='Y2JkNjAyMjItN2QyMi00MGNmLWIwMTYtMTY1Nzk5OGIwMWRl',"expired_at"='2025-05-30 18:28:55.77',"ip"='127.0.0.1',"token_version"='v1',"user_id"=1 WHERE "refreshtoken"."deleted_at" IS NULL AND "id" = 8
+
+2025/04/30 18:29:16 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.134ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:29:16 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.629ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and user_id = 1) AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:29:32 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.104ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:29:32 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.595ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and user_id = 1) AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:29:41 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.138ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:29:41 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.846ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'Y2JkNjAyMjItN2QyMi00MGNmLWIwMTYtMTY1Nzk5OGIwMWRl') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:29:47 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.171ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:29:47 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.784ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'Y2JkNjAyMjItN2QyMi00MGNmLWIwMTYtMTY1Nzk5OGIwMWRl') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:33:50 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.123ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:33:50 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.716ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'Y2JkNjAyMjItN2QyMi00MGNmLWIwMTYtMTY1Nzk5OGIwMWRl') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:34:35 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.123ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:34:35 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.601ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and user_id = 1) AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:34:35 /home/delorency/work/gojwtauthservice/internal/DB/authDB/update.go:12
+[2.890ms] [rows:1] UPDATE "refreshtoken" SET "id"=8,"created_at"='2025-04-29 20:51:57.817',"updated_at"='2025-04-30 18:34:35.526',"jti"='36432a5e-5043-4320-88f1-20f73f5decef',"user_agent"='PostmanRuntime/7.37.3',"refresh"='ZmQ1MTg1ZWQtNGJkZi00MWJhLWE4ZWEtNThiN2UyNWMyZWY3',"expired_at"='2025-05-30 18:34:35.525',"ip"='127.0.0.1',"token_version"='v2',"user_id"=1 WHERE "refreshtoken"."deleted_at" IS NULL AND "id" = 8
+
+2025/04/30 18:34:55 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.117ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:34:55 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.543ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and user_id = 1) AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:35:26 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[2.469ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 18:35:26 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.372ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 18:35:28 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[0.361ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:35:28 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12
+[1.477ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and user_id = 1) AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 18:35:44 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.158ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 18:35:44 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.798ms] [rows:1] SELECT * FROM "refreshtoken" WHERE (user_agent = 'PostmanRuntime/7.37.3' and refresh = 'ZmQ1MTg1ZWQtNGJkZi00MWJhLWE4ZWEtNThiN2UyNWMyZWY3') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
