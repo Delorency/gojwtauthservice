@@ -9,7 +9,6 @@ import (
 type RefreshToken struct {
 	gorm.Model
 	Jti          string `gorm:"uniqueIndex,size:128"`
-	UserAgent    string `gorm:"size:128"`
 	Refresh      string `gorm:"size:128"`
 	ExpiredAt    time.Time
 	Ip           string `gorm:"size:64"`

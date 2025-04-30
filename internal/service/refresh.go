@@ -5,6 +5,7 @@ import (
 	"auth/internal/tools"
 	"fmt"
 	"strings"
+	"time"
 )
 
 func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessResponse, error) {
@@ -24,24 +25,28 @@ func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessRes
 		tools.SendMail(
 			payload.Email,
 			"Warning",
-			"Вход с IP: "+data.Ip+" устройство: "+data.UserAgent,
+			"Попытка вход/вход с IP: "+data.Ip,
 			as.smtp,
 		)
 	}
 
-	obj, err := as.repo.AuthorizedUserToken(data.Refresh, data.UserAgent)
+	obj, err := as.repo.AuthorizedUserToken(data.Refresh)
 
 	if err != nil {
 		return nil, err
 	}
 
-	// совпадает ли версия токена с последней версией
-	if obj.User.TokenVersion != obj.TokenVersion {
+	// просрочен ли refresh токен
+	if time.Now().After(obj.ExpiredAt) {
 		return nil, fmt.Errorf("")
 	}
 
 	// jti refresh токена == jti access токена
 	if payload.Jti != obj.Jti {
+		return nil, fmt.Errorf("")
+	}
+	// совпадает ли версия токена с последней версией
+	if obj.User.TokenVersion != obj.TokenVersion {
 		return nil, fmt.Errorf("")
 	}
 

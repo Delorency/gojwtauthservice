@@ -8,7 +8,6 @@ import (
 func (ad *authDB) Create(data *schemes.AccessCreate) (string, error) {
 	obj := &models.RefreshToken{
 		Jti:          data.Jti,
-		UserAgent:    data.UserAgent,
 		Refresh:      data.Refresh,
 		ExpiredAt:    data.ExpiredAt,
 		Ip:           data.Ip,

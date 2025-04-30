@@ -46,7 +46,7 @@ func (ah *authHandler) Access(w http.ResponseWriter, r *http.Request) {
 		ah.logger.Println(l.GetLogEntry(r, http.StatusInternalServerError, []byte{}))
 		return
 	}
-	ac := schemes.AccessCreate{UserID: uint(guid), UserAgent: r.UserAgent(), Ip: ip}
+	ac := schemes.AccessCreate{UserID: uint(guid), Ip: ip}
 
 	ar, err := ah.service.Access(&ac)
 	if err != nil {

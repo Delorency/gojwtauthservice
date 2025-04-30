@@ -78,7 +78,6 @@ func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 	}
 
 	req.Ip = ip
-	req.UserAgent = r.UserAgent()
 
 	req.Access = token
 

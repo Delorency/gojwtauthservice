@@ -10,13 +10,12 @@ import (
 )
 
 func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessResponse, error) {
-	obj, f, err := as.repo.AuthorizedUserAgent(data.UserID, data.UserAgent, data.Ip)
+	obj, f, err := as.repo.AuthorizedUserAgent(data.UserID, data.Ip)
 
 	if err != nil {
 		return nil, err
 	}
 
-	// если устройство не найдено
 	if !f {
 		user, err := as.userdb.GetUserById(data.UserID)
 		if err != nil {
@@ -26,7 +25,7 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 
 		data.Jti = uuid.NewString()
 		data.ExpiredAt = time.Now().Add(as.cfg.Rtl)
-		data.Refresh = tools.GetRefershToken()
+		data.Refresh = tools.GetRefreshToken()
 
 		refresh, err := as.repo.Create(data)
 		if err != nil {
@@ -43,11 +42,11 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 		}, nil
 	}
 
-	if obj.TokenVersion != obj.User.TokenVersion || obj.UpdatedAt.After(obj.ExpiredAt) {
+	if obj.TokenVersion != obj.User.TokenVersion || time.Now().After(obj.ExpiredAt) {
 		obj.TokenVersion = obj.User.TokenVersion
 		obj.Jti = uuid.NewString()
 		obj.ExpiredAt = time.Now().Add(as.cfg.Rtl)
-		obj.Refresh = tools.GetRefershToken()
+		obj.Refresh = tools.GetRefreshToken()
 
 		err = as.repo.Update(obj)
 		if err != nil {

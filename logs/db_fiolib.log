@@ -1,0 +1,99 @@
+
+2025/04/30 22:43:02 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[3.123ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 22:43:02 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:404
+[0.553ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 22:43:02 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:404
+[2.983ms] [rows:0] CREATE TABLE "migrations" ("id" varchar(255),PRIMARY KEY ("id"))
+
+2025/04/30 22:43:02 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.530ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 22:43:02 /home/delorency/work/gojwtauthservice/storage/migrations/20250425_create_refreshtoken_table_user_table.go:14
+[0.632ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'users' AND table_type = 'BASE TABLE'
+
+2025/04/30 22:43:02 /home/delorency/work/gojwtauthservice/storage/migrations/20250425_create_refreshtoken_table_user_table.go:14
+[3.352ms] [rows:0] CREATE TABLE "users" ("id" bigserial,"created_at" timestamptz,"updated_at" timestamptz,"deleted_at" timestamptz,"email" varchar(128),"token_version" varchar(128) DEFAULT 'v1',PRIMARY KEY ("id"))
+
+2025/04/30 22:43:02 /home/delorency/work/gojwtauthservice/storage/migrations/20250425_create_refreshtoken_table_user_table.go:14
+[1.811ms] [rows:0] CREATE INDEX IF NOT EXISTS "idx_users_deleted_at" ON "users" ("deleted_at")
+
+2025/04/30 22:43:02 /home/delorency/work/gojwtauthservice/storage/migrations/20250425_create_refreshtoken_table_user_table.go:14
+[0.616ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'refreshtoken' AND table_type = 'BASE TABLE'
+
+2025/04/30 22:43:02 /home/delorency/work/gojwtauthservice/storage/migrations/20250425_create_refreshtoken_table_user_table.go:14
+[3.856ms] [rows:0] CREATE TABLE "refreshtoken" ("id" bigserial,"created_at" timestamptz,"updated_at" timestamptz,"deleted_at" timestamptz,"jti" text,"refresh" varchar(128),"expired_at" timestamptz,"ip" varchar(64),"token_version" varchar(128),"user_id" bigint,PRIMARY KEY ("id"),CONSTRAINT "fk_users_refresh_tokens" FOREIGN KEY ("user_id") REFERENCES "users"("id"))
+
+2025/04/30 22:43:02 /home/delorency/work/gojwtauthservice/storage/migrations/20250425_create_refreshtoken_table_user_table.go:14
+[1.604ms] [rows:0] CREATE INDEX IF NOT EXISTS "idx_refreshtoken_deleted_at" ON "refreshtoken" ("deleted_at")
+
+2025/04/30 22:43:02 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:466
+[0.863ms] [rows:1] INSERT INTO "migrations" ("id") VALUES ('20250425_create_refreshtoken_table_user_table')
+
+2025/04/30 22:43:02 /home/delorency/work/gojwtauthservice/internal/app/app.go:58
+[1.066ms] [rows:1] INSERT INTO "users" ("created_at","updated_at","deleted_at","email","token_version") VALUES ('2025-04-30 22:43:02.874','2025-04-30 22:43:02.874',NULL,'user1@gmail.com','8deb5e2f-fd4e-4ec1-a58d-6637458d2492') RETURNING "id"
+
+2025/04/30 22:43:02 /home/delorency/work/gojwtauthservice/internal/app/app.go:59
+[0.619ms] [rows:1] INSERT INTO "users" ("created_at","updated_at","deleted_at","email","token_version") VALUES ('2025-04-30 22:43:02.876','2025-04-30 22:43:02.876',NULL,'user2@gmail.com','fdec7f98-c39b-4a79-93b9-cbe83927b5d6') RETURNING "id"
+
+2025/04/30 22:43:02 /home/delorency/work/gojwtauthservice/internal/app/app.go:60
+[0.612ms] [rows:1] INSERT INTO "users" ("created_at","updated_at","deleted_at","email","token_version") VALUES ('2025-04-30 22:43:02.876','2025-04-30 22:43:02.876',NULL,'user3@gmail.com','1b3c0a43-5dc3-423a-9841-b14c02ead7df') RETURNING "id"
+
+2025/04/30 22:43:33 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12 record not found
+[0.919ms] [rows:0] SELECT * FROM "refreshtoken" WHERE (user_id = 1 and ip = '::1') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 22:43:33 /home/delorency/work/gojwtauthservice/internal/DB/userDB/get.go:12
+[0.366ms] [rows:1] SELECT * FROM "users" WHERE "users"."deleted_at" IS NULL AND "users"."id" = 1 ORDER BY "users"."id" LIMIT 1
+
+2025/04/30 22:43:33 /home/delorency/work/gojwtauthservice/internal/DB/authDB/create.go:17
+[1.040ms] [rows:1] INSERT INTO "refreshtoken" ("created_at","updated_at","deleted_at","jti","refresh","expired_at","ip","token_version","user_id") VALUES ('2025-04-30 22:43:33.489','2025-04-30 22:43:33.489',NULL,'13fc05e3-8ac2-4d76-939a-a8b10bdd28ab','ODNkODM5NmItZjQ4Zi00ZjdhLWI4NzQtNDI4M2JmMGNjOWJh','2025-05-30 22:43:33.489','::1','8deb5e2f-fd4e-4ec1-a58d-6637458d2492',1) RETURNING "id"
+
+2025/04/30 22:49:54 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:401
+[2.589ms] [rows:1] SELECT count(*) FROM information_schema.tables WHERE table_schema = CURRENT_SCHEMA() AND table_name = 'migrations' AND table_type = 'BASE TABLE'
+
+2025/04/30 22:49:54 /home/delorency/go/pkg/mod/github.com/go-gormigrate/gormigrate/v2@v2.1.4/gormigrate.go:412
+[0.404ms] [rows:1] SELECT count(*) FROM "migrations" WHERE id = '20250425_create_refreshtoken_table_user_table'
+
+2025/04/30 22:49:54 /home/delorency/work/gojwtauthservice/internal/app/app.go:58
+[1.442ms] [rows:1] INSERT INTO "users" ("created_at","updated_at","deleted_at","email","token_version") VALUES ('2025-04-30 22:49:54.885','2025-04-30 22:49:54.885',NULL,'user1@gmail.com','1429d398-d408-43ca-bfc5-500eb2e76f28') RETURNING "id"
+
+2025/04/30 22:49:54 /home/delorency/work/gojwtauthservice/internal/app/app.go:59
+[0.723ms] [rows:1] INSERT INTO "users" ("created_at","updated_at","deleted_at","email","token_version") VALUES ('2025-04-30 22:49:54.886','2025-04-30 22:49:54.886',NULL,'user2@gmail.com','c703c868-e558-4ffa-8755-02c37d722d40') RETURNING "id"
+
+2025/04/30 22:49:54 /home/delorency/work/gojwtauthservice/internal/app/app.go:60
+[0.613ms] [rows:1] INSERT INTO "users" ("created_at","updated_at","deleted_at","email","token_version") VALUES ('2025-04-30 22:49:54.887','2025-04-30 22:49:54.887',NULL,'user3@gmail.com','84ca68d7-6f3b-4407-ab35-c93da726a999') RETURNING "id"
+
+2025/04/30 22:51:18 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.271ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 22:51:18 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[1.080ms] [rows:1] SELECT * FROM "refreshtoken" WHERE refresh = 'ODNkODM5NmItZjQ4Zi00ZjdhLWI4NzQtNDI4M2JmMGNjOWJh' AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 22:51:51 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.135ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 1 AND "users"."deleted_at" IS NULL
+
+2025/04/30 22:51:51 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.533ms] [rows:1] SELECT * FROM "refreshtoken" WHERE refresh = 'ODNkODM5NmItZjQ4Zi00ZjdhLWI4NzQtNDI4M2JmMGNjOWJh' AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 22:59:52 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:12 record not found
+[0.638ms] [rows:0] SELECT * FROM "refreshtoken" WHERE (user_id = 2 and ip = '::1') AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 22:59:52 /home/delorency/work/gojwtauthservice/internal/DB/userDB/get.go:12
+[0.668ms] [rows:1] SELECT * FROM "users" WHERE "users"."deleted_at" IS NULL AND "users"."id" = 2 ORDER BY "users"."id" LIMIT 1
+
+2025/04/30 22:59:52 /home/delorency/work/gojwtauthservice/internal/DB/authDB/create.go:17
+[1.176ms] [rows:1] INSERT INTO "refreshtoken" ("created_at","updated_at","deleted_at","jti","refresh","expired_at","ip","token_version","user_id") VALUES ('2025-04-30 22:59:52.75','2025-04-30 22:59:52.75',NULL,'9131aa60-fd1a-4da6-bc93-cc740484cf15','ZjI3OTNlZDItYmM5NC00ODk0LWJhMjEtMTk0MmExOTFjNmU4','2025-05-30 22:59:52.749','::1','fdec7f98-c39b-4a79-93b9-cbe83927b5d6',2) RETURNING "id"
+
+2025/04/30 23:01:03 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.138ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 2 AND "users"."deleted_at" IS NULL
+
+2025/04/30 23:01:03 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.603ms] [rows:1] SELECT * FROM "refreshtoken" WHERE refresh = 'ZjI3OTNlZDItYmM5NC00ODk0LWJhMjEtMTk0MmExOTFjNmU4' AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1
+
+2025/04/30 23:03:11 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.134ms] [rows:1] SELECT * FROM "users" WHERE "users"."id" = 2 AND "users"."deleted_at" IS NULL
+
+2025/04/30 23:03:11 /home/delorency/work/gojwtauthservice/internal/DB/authDB/get.go:25
+[0.579ms] [rows:1] SELECT * FROM "refreshtoken" WHERE refresh = 'ZjI3OTNlZDItYmM5NC00ODk0LWJhMjEtMTk0MmExOTFjNmU4' AND "refreshtoken"."deleted_at" IS NULL ORDER BY "refreshtoken"."id" LIMIT 1

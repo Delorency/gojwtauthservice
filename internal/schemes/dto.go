@@ -12,7 +12,6 @@ func init() {
 
 type AccessCreate struct {
 	Jti          string
-	UserAgent    string
 	Refresh      string
 	ExpiredAt    time.Time
 	Ip           string
@@ -26,8 +25,7 @@ type AccessResponse struct {
 }
 
 type RefreshRequest struct {
-	Refresh   string `json:"refresh" validate:"required"`
-	Access    string
-	Ip        string
-	UserAgent string
+	Refresh string `json:"refresh" validate:"required"`
+	Access  string
+	Ip      string
 }
