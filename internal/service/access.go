@@ -26,14 +26,14 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 
 		data.Jti = uuid.NewString()
 		data.ExpiredAt = time.Now().Add(as.cfg.Rtl)
-		data.Refresh = tools.EncodeToBase64()
+		data.Refresh = tools.GetRefershToken()
 
 		refresh, err := as.repo.Create(data)
 		if err != nil {
 			return nil, err
 		}
 
-		access, err := tools.GetJWTToken()
+		access, err := tools.GetJWTToken(as.cfg, data.Jti)
 		if err != nil {
 			return nil, err
 		}
@@ -42,18 +42,19 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 			RefreshToken: refresh,
 		}, nil
 	}
-	if obj.TokenVersion != obj.User.TokenVersion || tools.CheckExpire(obj.ExpiredAt) {
+
+	if obj.TokenVersion != obj.User.TokenVersion || obj.UpdatedAt.After(obj.ExpiredAt) {
 		obj.TokenVersion = obj.User.TokenVersion
 		obj.Jti = uuid.NewString()
 		obj.ExpiredAt = time.Now().Add(as.cfg.Rtl)
-		obj.Refresh = tools.EncodeToBase64()
+		obj.Refresh = tools.GetRefershToken()
 
-		err := as.repo.Update(obj)
+		err = as.repo.Update(obj)
 		if err != nil {
 			return nil, err
 		}
 
-		access, err := tools.GetJWTToken()
+		access, err := tools.GetJWTToken(as.cfg, obj.Jti)
 		if err != nil {
 			return nil, err
 		}
@@ -62,7 +63,6 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 			AccessToken:  access,
 			RefreshToken: obj.Refresh,
 		}, nil
-
 	}
 
 	return nil, fmt.Errorf("")

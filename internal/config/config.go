@@ -1,7 +1,6 @@
 package config
 
 import (
-	tools "auth/internal/tools"
 	"log"
 	"os"
 	"time"
@@ -68,8 +67,18 @@ func MustLoad() *Config {
 		log.Fatalln("Ошибка чтения настроек jwt токена из .env файлы")
 	}
 
-	cfgJWT.Atl = tools.GetDuration(os.Getenv("ACCESS_TOKEN_LIFETIME"))
-	cfgJWT.Rtl = tools.GetDuration(os.Getenv("REFRESH_TOKEN_LIFETIME"))
+	accessDuration, err := time.ParseDuration(os.Getenv("ACCESS_TOKEN_LIFETIME"))
+	if err != nil {
+		log.Fatalln("Ошибка парсинга lifetime access токена")
+	}
+
+	refreshDuration, err := time.ParseDuration(os.Getenv("REFRESH_TOKEN_LIFETIME"))
+	if err != nil {
+		log.Fatalln("Ошибка парсинга lifetime access токена")
+	}
+
+	cfgJWT.Atl = accessDuration
+	cfgJWT.Rtl = refreshDuration
 
 	return &Config{&cfgHttpServer, &cfgDatabase, &cgfLogger, &cfgJWT}
 }

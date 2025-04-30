@@ -1,0 +1,13 @@
+2025/04/30 17:18:15 Set IP: localhost:8080
+2025/04/30 17:18:15 Starting server
+2025/04/30 17:25:33 Set IP: localhost:8080
+2025/04/30 17:25:33 Starting server
+2025/04/30 17:25:37 {"Status":400,"method":"POST","url":"/access/1","ip":"127.0.0.1:39012","headers":{"Accept":"*/*","Accept-Encoding":"gzip, deflate, br","Connection":"keep-alive","Content-Length":"4","Content-Type":"application/json","Postman-Token":"a615c65d-13ba-441c-98e7-51b6e0766cb4","User-Agent":"PostmanRuntime/7.37.3"},"request_body":null}
+2025/04/30 17:29:03 Set IP: localhost:8080
+2025/04/30 17:29:03 Starting server
+2025/04/30 17:29:05 {"Status":400,"method":"POST","url":"/access/1","ip":"127.0.0.1:44258","headers":{"Accept":"*/*","Accept-Encoding":"gzip, deflate, br","Connection":"keep-alive","Content-Length":"4","Content-Type":"application/json","Postman-Token":"6800c8fa-996d-4337-accc-3f4cee761a21","User-Agent":"PostmanRuntime/7.37.3"},"request_body":null}
+2025/04/30 17:30:43 Set IP: localhost:8080
+2025/04/30 17:30:43 Starting server
+2025/04/30 17:32:40 Set IP: localhost:8080
+2025/04/30 17:32:40 Starting server
+2025/04/30 17:32:49 {"Status":400,"method":"POST","url":"/refresh","ip":"127.0.0.1:40310","headers":{"Accept":"*/*","Accept-Encoding":"gzip, deflate, br","Connection":"keep-alive","Content-Length":"4","Content-Type":"application/json","Postman-Token":"dd81ffc0-ab2e-42e6-98cf-69aa480f8620","User-Agent":"PostmanRuntime/7.37.3"},"request_body":{}}

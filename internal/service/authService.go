@@ -9,7 +9,7 @@ import (
 
 type AuthServiceI interface {
 	Access(*schemes.AccessCreate) (*schemes.AccessResponse, error)
-	Refresh(string)
+	Refresh(*schemes.RefreshRequest) (*schemes.AccessResponse, error)
 }
 
 type authService struct {

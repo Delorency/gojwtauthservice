@@ -40,8 +40,47 @@ func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-	ip, _ := tools.GetIp(r)
+	ip, err := tools.GetIp(r)
+	if err != nil {
+		response.NewResponse(
+			e.NewError("Ошибка парсинга IP"),
+			http.StatusInternalServerError,
+			w,
+		)
+		ah.logger.Println(l.GetLogEntry(r, http.StatusInternalServerError, []byte{}))
+		return
+	}
 
 	req.Ip = ip
 	req.UserAgent = r.UserAgent()
+
+	token, err := tools.GetAuthHeader(r)
+	if err != nil {
+		response.NewResponse(
+			e.NewError("Валидный токен не найден"),
+			http.StatusUnauthorized,
+			w,
+		)
+		ah.logger.Println(l.GetLogEntry(r, http.StatusUnauthorized, []byte{}))
+		return
+	}
+	req.Access = token
+
+	ah.service.Refresh(&req)
+
+	ar, err := ah.service.Refresh(&req)
+	if err != nil {
+		response.NewResponse(
+			e.NewError("Ошибка обновления токена"),
+			http.StatusBadRequest,
+			w,
+		)
+		ah.logger.Println(l.GetLogEntry(r, http.StatusBadRequest, []byte{}))
+		return
+	}
+	response.NewResponse(
+		ar,
+		http.StatusOK,
+		w,
+	)
 }
