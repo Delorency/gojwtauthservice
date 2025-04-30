@@ -9,7 +9,13 @@ import (
 )
 
 func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessResponse, error) {
-	obj, err := as.repo.AuthorizedUserToken(data.Refresh)
+
+	// валидный ли access токен?
+	if !tools.ValidToken(data.Access, as.cfg.SecretKey) {
+		return nil, fmt.Errorf("")
+	}
+
+	obj, err := as.repo.AuthorizedUserToken(data.Refresh, data.UserAgent)
 
 	if err != nil {
 		return nil, err
@@ -19,14 +25,9 @@ func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessRes
 		tools.SendMail(
 			obj.User.Email,
 			"Warning",
-			"Попытка входа с IP "+data.Ip,
+			"Вход с IP: "+data.Ip+" устройство: "+data.UserAgent,
 			as.smtp,
 		)
-		return nil, fmt.Errorf("")
-	}
-	// проверка на соответствие UserAgent
-	if obj.UserAgent != data.UserAgent {
-		return nil, fmt.Errorf("")
 	}
 
 	// refresh просрочен?
@@ -36,16 +37,6 @@ func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessRes
 
 	// совпадает ли версия токена с последней версией
 	if obj.User.TokenVersion != obj.TokenVersion {
-		return nil, fmt.Errorf("")
-	}
-
-	// проверка равенства ip при выдаче refresh с текущим
-	if obj.Ip != data.Ip {
-		return nil, fmt.Errorf("")
-	}
-
-	// валидный ли access токен?
-	if !tools.ValidToken(data.Access, as.cfg.SecretKey) {
 		return nil, fmt.Errorf("")
 	}
 

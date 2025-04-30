@@ -10,7 +10,7 @@ import (
 )
 
 func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessResponse, error) {
-	obj, f, err := as.repo.AuthorizedUserAgent(data.UserID, data.UserAgent)
+	obj, f, err := as.repo.AuthorizedUserAgent(data.UserID, data.UserAgent, data.Ip)
 
 	if err != nil {
 		return nil, err
