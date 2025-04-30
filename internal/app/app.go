@@ -37,7 +37,7 @@ func Start() {
 
 	log.Printf("Server work on %s:%s\n", cfg.HTTPServer.Host, cfg.HTTPServer.Port)
 
-	// CreateListTestUser(db) // создание тестовых пользователей
+	CreateListTestUser(db) // создание тестовых пользователей
 
 	if err := server.ListenAndServe(); err != nil {
 		log.Fatalln(err)
