@@ -27,7 +27,7 @@ Access токен - полноценный JWT токен. Refresh токен п
 ```bash
     make dockerup
 ```
-сервис будет ожидать на localhost:${DOCKER_HOST_PORT}
+сервис будет ожидать на localhost:${DOCKER_HOST_PORT}    
 swagger - localhost:${DOCKER_HOST_PORT}/swagger
 #### В терминале
 Далее в корне проекта запустить
@@ -38,7 +38,7 @@ swagger - localhost:${DOCKER_HOST_PORT}/swagger
 ```bash
     make terminalup
 ```
-сервис будет ожидать на localhost:${PORT}
+сервис будет ожидать на localhost:${PORT}    
 swagger - localhost:${PORT}/swagger
 
 ### Что нужно сделать
