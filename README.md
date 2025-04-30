@@ -28,6 +28,7 @@ Access токен - полноценный JWT токен. Refresh токен п
     make dockerup
 ```
 сервис будет ожидать на localhost:${DOCKER_HOST_PORT}
+swagger - localhost:${DOCKER_HOST_PORT}/swagger
 #### В терминале
 Далее в корне проекта запустить
 ```bash
@@ -38,6 +39,7 @@ Access токен - полноценный JWT токен. Refresh токен п
     make terminalup
 ```
 сервис будет ожидать на localhost:${PORT}
+swagger - localhost:${PORT}/swagger
 
 ### Что нужно сделать
 - добавить Redis, чтобы забрасывать туда access токены после операции /refresh.
