@@ -37,7 +37,7 @@ func Start() {
 
 	log.Printf("Server work on %s:%s\n", cfg.HTTPServer.Host, cfg.HTTPServer.Port)
 
-	CreateListTestUser(db) // создание тестовых пользователей
+	// CreateListTestUser(db) // создание тестовых пользователей
 
 	if err := server.ListenAndServe(); err != nil {
 		log.Fatalln(err)
@@ -52,9 +52,9 @@ func checkUpDB(logger gormlogger.Interface) *gorm.DB {
 }
 
 func CreateListTestUser(db *gorm.DB) {
-	u1 := models.User{TokenVersion: uuid.NewString(), Email: "user1@gmail.com"}
-	u2 := models.User{TokenVersion: uuid.NewString(), Email: "user2@gmail.com"}
-	u3 := models.User{TokenVersion: uuid.NewString(), Email: "user3@gmail.com"}
+	u1 := &models.User{TokenVersion: uuid.NewString(), Email: "user1@gmail.com"}
+	u2 := &models.User{TokenVersion: uuid.NewString(), Email: "user2@gmail.com"}
+	u3 := &models.User{TokenVersion: uuid.NewString(), Email: "user3@gmail.com"}
 	db.Create(u1)
 	db.Create(u2)
 	db.Create(u3)
