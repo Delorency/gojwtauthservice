@@ -15,8 +15,9 @@ services:
   app:
     build: .
     restart: always
+    container_name: authservice
     depends_on:
-      - db 
+      - db
     env_file:
       - ./configs/.env
     environment:
@@ -25,6 +26,5 @@ services:
       - "${DOCKER_HOST_PORT}:${PORT}"
     volumes:
       - ${LOGDIR}:/root/${LOGSDIR}
-
 volumes:
   postgres_data:
