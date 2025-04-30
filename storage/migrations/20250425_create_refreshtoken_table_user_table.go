@@ -14,7 +14,7 @@ func CreateRefreshTokenTable() *gormigrate.Migration {
 			return tx.AutoMigrate(&models.RefreshToken{}, &models.User{})
 		},
 		Rollback: func(tx *gorm.DB) error {
-			return tx.Migrator().DropTable(models.RefreshToken{}.TableName())
+			return tx.Migrator().DropTable(models.RefreshToken{}.TableName(), models.User{}.TableName())
 		},
 	}
 }

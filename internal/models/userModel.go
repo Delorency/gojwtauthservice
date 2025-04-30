@@ -9,3 +9,7 @@ type User struct {
 
 	RefreshTokens []RefreshToken `gorm:"foreignKey:UserID"`
 }
+
+func (User) TableName() string {
+	return "users"
+}
