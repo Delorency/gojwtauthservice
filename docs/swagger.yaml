@@ -1,0 +1,103 @@
+definitions:
+  swagger.SwaggerAccessResponse:
+    properties:
+      access_token:
+        type: string
+      refresh_token:
+        type: string
+    type: object
+  swagger.SwaggerNewError:
+    properties:
+      error:
+        type: string
+    type: object
+  swagger.SwaggerRefreshRequest:
+    properties:
+      refresh:
+        type: string
+    required:
+    - refresh
+    type: object
+  swagger.SwaggerValidateData:
+    properties:
+      error:
+        type: string
+      fields:
+        items:
+          type: string
+        type: array
+    type: object
+info:
+  contact: {}
+paths:
+  /access/{guid}:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Идентификатор пользователя
+        in: path
+        name: guid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/swagger.SwaggerAccessResponse'
+            type: array
+        "400":
+          description: Ошибка создания токена
+          schema:
+            $ref: '#/definitions/swagger.SwaggerNewError'
+        "500":
+          description: Ошибка парсинга IP
+          schema:
+            $ref: '#/definitions/swagger.SwaggerNewError'
+      summary: Получить пару access, refresh токенов
+      tags:
+      - Auth
+  /refresh:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Refresh токен
+        in: body
+        name: person
+        required: true
+        schema:
+          $ref: '#/definitions/swagger.SwaggerRefreshRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/swagger.SwaggerAccessResponse'
+        "400":
+          description: Ошибка обновления токена
+          schema:
+            $ref: '#/definitions/swagger.SwaggerNewError'
+        "401":
+          description: Валидный токен не найден
+          schema:
+            $ref: '#/definitions/swagger.SwaggerNewError'
+        "500":
+          description: Ошибка парсинга тела запроса
+          schema:
+            $ref: '#/definitions/swagger.SwaggerNewError'
+      security:
+      - BearerAuth: []
+      summary: Получить новый access токен
+      tags:
+      - Auth
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

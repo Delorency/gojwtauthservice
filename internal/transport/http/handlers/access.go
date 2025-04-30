@@ -6,12 +6,25 @@ import (
 	"auth/internal/tools"
 	e "auth/internal/transport/http/error"
 	"auth/internal/transport/http/response"
+	sw "auth/internal/transport/http/swagger"
 	"net/http"
 	"strconv"
 
 	"github.com/go-chi/chi"
 )
 
+var _ = sw.SwaggerAccessResponse{}
+
+// @Summary Получить пару access, refresh токенов
+// @tags Auth
+// @Accept  json
+// @Produce json
+// @Param   guid          path int   true "Идентификатор пользователя"
+// @Success 200 {array} swagger.SwaggerAccessResponse
+// @Failure 400 {object} swagger.SwaggerNewError "guid должно быть числом > 0"
+// @Failure 400 {object} swagger.SwaggerNewError "Ошибка создания токена"
+// @Failure 500 {object} swagger.SwaggerNewError "Ошибка парсинга IP"
+// @Router  /access/{guid} [post]
 func (ah *authHandler) Access(w http.ResponseWriter, r *http.Request) {
 	guid, err := strconv.Atoi(chi.URLParam(r, "guid"))
 	if err != nil || guid <= 0 {

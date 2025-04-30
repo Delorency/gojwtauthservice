@@ -20,16 +20,11 @@ func (ad *authDB) AuthorizedUserAgent(userid uint, useragent string) (*models.Re
 	}
 	return &refreshdata, true, nil
 }
-func (ad *authDB) AuthorizedUserAgentToken(refresh string, useragent string) (*models.RefreshToken, bool, error) {
+func (ad *authDB) AuthorizedUserToken(refresh string) (*models.RefreshToken, error) {
 	var refreshdata models.RefreshToken
-	result := ad.db.Where("user_agent = ? and refresh = ?", useragent, refresh).Preload("User").First(&refreshdata)
-	if result.Error != nil {
-
-		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-			return nil, false, nil
-
-		}
-		return nil, false, result.Error
+	err := ad.db.Where("refresh = ?", refresh).Preload("User").First(&refreshdata).Error
+	if err != nil {
+		return nil, err
 	}
-	return &refreshdata, true, nil
+	return &refreshdata, nil
 }

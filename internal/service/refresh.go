@@ -9,14 +9,23 @@ import (
 )
 
 func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessResponse, error) {
-	obj, f, err := as.repo.AuthorizedUserAgentToken(data.Refresh, data.UserAgent)
+	obj, err := as.repo.AuthorizedUserToken(data.Refresh)
 
 	if err != nil {
 		return nil, err
 	}
 
-	// такой refresh под таким устройством на найден
-	if !f {
+	if obj.Ip != data.Ip {
+		tools.SendMail(
+			obj.User.Email,
+			"Warning",
+			"Попытка входа с IP "+data.Ip,
+			as.smtp,
+		)
+		return nil, fmt.Errorf("")
+	}
+	// проверка на соответствие UserAgent
+	if obj.UserAgent != data.UserAgent {
 		return nil, fmt.Errorf("")
 	}
 
@@ -27,6 +36,11 @@ func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessRes
 
 	// совпадает ли версия токена с последней версией
 	if obj.User.TokenVersion != obj.TokenVersion {
+		return nil, fmt.Errorf("")
+	}
+
+	// проверка равенства ip при выдаче refresh с текущим
+	if obj.Ip != data.Ip {
 		return nil, fmt.Errorf("")
 	}
 
@@ -56,4 +70,4 @@ func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessRes
 		AccessToken:  access,
 		RefreshToken: data.Refresh,
 	}, nil
-} // ZGRkMWQ1MTctYmMzNS00ZDQ3LWFjYzMtYWFkZmYwNWZiNzhi
+}

@@ -18,10 +18,10 @@ type Container struct {
 	AuthService service.AuthServiceI
 }
 
-func NewContainer(db *gorm.DB, cfg *config.ConfigJWTToken) *Container {
+func NewContainer(db *gorm.DB, cfg *config.ConfigJWTToken, smtp *config.ConfigSMTP) *Container {
 	userrepo := userdb.NewUserDB(db)
 	authrepo := authdb.NewAuthDB(db, userrepo)
-	authservice := service.NewAuthService(authrepo, userrepo, cfg)
+	authservice := service.NewAuthService(authrepo, userrepo, cfg, smtp)
 
 	return &Container{
 		AuthRepo:    authrepo,

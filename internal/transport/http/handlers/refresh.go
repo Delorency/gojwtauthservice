@@ -10,11 +10,27 @@ import (
 	"io"
 	"net/http"
 
+	sw "auth/internal/transport/http/swagger"
 	v "auth/internal/validator"
 
 	"github.com/go-playground/validator"
 )
 
+var _ = sw.SwaggerAccessResponse{}
+
+// @Summary Получить новый access токен
+// @Security BearerAuth
+// @tags Auth
+// @Accept  json
+// @Produce json
+// @Param   person body swagger.SwaggerRefreshRequest true "Refresh токен"
+// @Success 201 {object} swagger.SwaggerAccessResponse
+// @Failure 401 {object} swagger.SwaggerNewError "Валидный токен не найден"
+// @Failure 400 {object} swagger.SwaggerValidateData "Необходимые поля не заполнены"
+// @Failure 400 {object} swagger.SwaggerNewError "Ошибка обновления токена"
+// @Failure 500 {object} swagger.SwaggerNewError "Ошибка парсинга IP"
+// @Failure 500 {object} swagger.SwaggerNewError "Ошибка парсинга тела запроса"
+// @Router  /refresh [post]
 func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 	token, err := tools.GetAuthHeader(r)
 	if err != nil {
@@ -81,4 +97,5 @@ func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 		http.StatusOK,
 		w,
 	)
+	ah.logger.Println(l.GetLogEntry(r, http.StatusOK, []byte{}))
 }

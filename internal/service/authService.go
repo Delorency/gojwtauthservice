@@ -16,8 +16,9 @@ type authService struct {
 	repo   db.AuthDBI
 	userdb userdb.UserDBI
 	cfg    *config.ConfigJWTToken
+	smtp   *config.ConfigSMTP
 }
 
-func NewAuthService(repo db.AuthDBI, userdb userdb.UserDBI, cfg *config.ConfigJWTToken) AuthServiceI {
-	return &authService{repo, userdb, cfg}
+func NewAuthService(repo db.AuthDBI, userdb userdb.UserDBI, cfg *config.ConfigJWTToken, smtp *config.ConfigSMTP) AuthServiceI {
+	return &authService{repo, userdb, cfg, smtp}
 }

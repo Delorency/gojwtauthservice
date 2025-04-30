@@ -39,11 +39,19 @@ type ConfigJWTToken struct {
 	Rtl time.Duration
 }
 
+type ConfigSMTP struct {
+	SmtpFrom string `env:"EMAIL_FROM"`
+	SmtpPass string `env:"EMAIL_PASS"`
+	SmtpHost string `env:"SMTPHOST"`
+	SmtpPort string `env:"SMTPPORT"`
+}
+
 type Config struct {
 	HTTPServer *ConfigHTTPServer
 	Db         *ConfigDatabase
 	Logger     *ConfigLogger
 	JWT        *ConfigJWTToken
+	SMTP       *ConfigSMTP
 }
 
 func MustLoad() *Config {
@@ -53,6 +61,7 @@ func MustLoad() *Config {
 	var cfgDatabase ConfigDatabase
 	var cgfLogger ConfigLogger
 	var cfgJWT ConfigJWTToken
+	var cfgSMTP ConfigSMTP
 
 	if err := cleanenv.ReadEnv(&cfgHttpServer); err != nil {
 		log.Fatalln("Ошибка чтения настроек сервера из .env файлы")
@@ -65,6 +74,9 @@ func MustLoad() *Config {
 	}
 	if err := cleanenv.ReadEnv(&cfgJWT); err != nil {
 		log.Fatalln("Ошибка чтения настроек jwt токена из .env файлы")
+	}
+	if err := cleanenv.ReadEnv(&cfgSMTP); err != nil {
+		log.Fatalln("Ошибка чтения настроек smtp из .env файлы")
 	}
 
 	accessDuration, err := time.ParseDuration(os.Getenv("ACCESS_TOKEN_LIFETIME"))
@@ -80,5 +92,5 @@ func MustLoad() *Config {
 	cfgJWT.Atl = accessDuration
 	cfgJWT.Rtl = refreshDuration
 
-	return &Config{&cfgHttpServer, &cfgDatabase, &cgfLogger, &cfgJWT}
+	return &Config{&cfgHttpServer, &cfgDatabase, &cgfLogger, &cfgJWT, &cfgSMTP}
 }
