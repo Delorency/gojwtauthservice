@@ -34,7 +34,7 @@ swagger - localhost:${DOCKER_HOST_PORT}/swagger
 #### В терминале
 Далее в корне проекта запустить
 ```bash
-    go run ./cmd/gofiolib/main.go
+    go run ./cmd/gojwt/main.go
 ```
 или
 ```bash
