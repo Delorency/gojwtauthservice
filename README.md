@@ -1,5 +1,5 @@
 ## JWT Auth service
-Сервис для JWT аутентификации.
+### Endpoints
 
 #### /access/{guid}
 Данный эндпоинт выдает пару Access, Refresh токенов.
