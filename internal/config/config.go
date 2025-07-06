@@ -70,7 +70,7 @@ func MustLoad() *Config {
 		log.Fatalln("Ошибка чтения настроек бд из .env файлы")
 	}
 	if err := cleanenv.ReadEnv(&cgfLogger); err != nil {
-		log.Fatalln("Ошибка чтения настроек логгера из .env файлы")
+		log.Fatalln("Ошибка чтения настроек логгеров из .env файлы")
 	}
 	if err := cleanenv.ReadEnv(&cfgJWT); err != nil {
 		log.Fatalln("Ошибка чтения настроек jwt токена из .env файлы")
@@ -86,7 +86,7 @@ func MustLoad() *Config {
 
 	refreshDuration, err := time.ParseDuration(os.Getenv("REFRESH_TOKEN_LIFETIME"))
 	if err != nil {
-		log.Fatalln("Ошибка парсинга lifetime access токена")
+		log.Fatalln("Ошибка парсинга lifetime refresh токена")
 	}
 
 	cfgJWT.Atl = accessDuration

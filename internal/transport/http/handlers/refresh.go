@@ -32,7 +32,7 @@ var _ = sw.SwaggerAccessResponse{}
 // @Failure 500 {object} swagger.SwaggerNewError "Ошибка парсинга тела запроса"
 // @Router  /refresh [post]
 func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
-	token, err := tools.GetAuthHeader(r)
+	token, err := tools.GetTokenFromHeader(r)
 	if err != nil {
 		response.NewResponse(
 			e.NewError("Валидный токен не найден"),
@@ -73,7 +73,7 @@ func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 			http.StatusInternalServerError,
 			w,
 		)
-		ah.logger.Println(l.GetLogEntry(r, http.StatusInternalServerError, []byte{}))
+		ah.logger.Println(l.GetLogEntry(r, http.StatusInternalServerError, bodyBytes))
 		return
 	}
 
@@ -88,7 +88,7 @@ func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 			http.StatusBadRequest,
 			w,
 		)
-		ah.logger.Println(l.GetLogEntry(r, http.StatusBadRequest, []byte{}))
+		ah.logger.Println(l.GetLogEntry(r, http.StatusBadRequest, bodyBytes))
 		return
 	}
 	response.NewResponse(
@@ -96,5 +96,5 @@ func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 		http.StatusOK,
 		w,
 	)
-	ah.logger.Println(l.GetLogEntry(r, http.StatusOK, []byte{}))
+	ah.logger.Println(l.GetLogEntry(r, http.StatusOK, bodyBytes))
 }

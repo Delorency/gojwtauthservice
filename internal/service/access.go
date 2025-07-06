@@ -27,7 +27,7 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 		data.ExpiredAt = time.Now().Add(as.cfg.Rtl)
 		data.Refresh = tools.GetRefreshToken()
 
-		refresh, err := as.repo.Create(data)
+		err = as.repo.Create(data)
 		if err != nil {
 			return nil, err
 		}
@@ -38,7 +38,7 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 		}
 		return &schemes.AccessResponse{
 			AccessToken:  access,
-			RefreshToken: refresh,
+			RefreshToken: data.Refresh,
 		}, nil
 	}
 

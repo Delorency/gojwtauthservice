@@ -49,9 +49,9 @@ func GetJWTToken(cfg *config.ConfigJWTToken, jti string, ip string, email string
 	base64Header := GetBase64Token(header_byte)
 	base64Payload := GetBase64Token(payload_byte)
 
-	data := GetBase64Token(header_byte) + "." + GetBase64Token(payload_byte)
+	data := base64Header + "." + base64Payload
 
-	return fmt.Sprintf("%s.%s.%s", base64Header, base64Payload, GetHmacSha512(data, cfg.SecretKey)), nil
+	return fmt.Sprintf("%s.%s", data, GetHmacSha512(data, cfg.SecretKey)), nil
 }
 
 func GetHmacSha512(data string, sk string) string {

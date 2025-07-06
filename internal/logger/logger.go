@@ -34,10 +34,10 @@ func GetDBLogger(path string) logger.Interface {
 	return logger.New(
 		log.New(file, "\r\n", log.LstdFlags),
 		logger.Config{
-			SlowThreshold:             time.Second,
-			LogLevel:                  logger.Info,
-			Colorful:                  false,
-			IgnoreRecordNotFoundError: false,
+			SlowThreshold: time.Second,
+			LogLevel:      logger.Info,
+			// Colorful:                  false,
+			// IgnoreRecordNotFoundError: false,
 		},
 	)
 }

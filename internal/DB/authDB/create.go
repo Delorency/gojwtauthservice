@@ -5,7 +5,7 @@ import (
 	"auth/internal/schemes"
 )
 
-func (ad *authDB) Create(data *schemes.AccessCreate) (string, error) {
+func (ad *authDB) Create(data *schemes.AccessCreate) error {
 	obj := &models.RefreshToken{
 		Jti:          data.Jti,
 		Refresh:      data.Refresh,
@@ -14,9 +14,5 @@ func (ad *authDB) Create(data *schemes.AccessCreate) (string, error) {
 		TokenVersion: data.TokenVersion,
 		UserID:       data.UserID,
 	}
-	err := ad.db.Create(obj).Error
-	if err != nil {
-		return "", err
-	}
-	return data.Refresh, nil
+	return ad.db.Create(obj).Error
 }

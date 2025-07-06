@@ -23,8 +23,12 @@ func init() {
 }
 
 func Start() {
-	apilogger := logger.GetAPILogger(fmt.Sprintf("%s/%s", cfg.Logger.LogsDir, cfg.Logger.APIlp))
-	dblogger := logger.GetDBLogger(fmt.Sprintf("%s/%s", cfg.Logger.LogsDir, cfg.Logger.DBlp))
+	apilogger := logger.GetAPILogger(
+		fmt.Sprintf("%s/%s", cfg.Logger.LogsDir, cfg.Logger.APIlp),
+	)
+	dblogger := logger.GetDBLogger(
+		fmt.Sprintf("%s/%s", cfg.Logger.LogsDir, cfg.Logger.DBlp),
+	)
 
 	db := checkUpDB(dblogger)
 

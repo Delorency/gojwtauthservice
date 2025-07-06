@@ -11,7 +11,7 @@ import (
 type AuthDBI interface {
 	AuthorizedUserAgent(uint, string) (*models.RefreshToken, bool, error)
 	AuthorizedUserToken(string) (*models.RefreshToken, error)
-	Create(*schemes.AccessCreate) (string, error)
+	Create(*schemes.AccessCreate) error
 	Update(*models.RefreshToken) error
 }
 
