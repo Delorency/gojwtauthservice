@@ -3,12 +3,19 @@ package service
 import (
 	"auth/internal/schemes"
 	"auth/internal/tools"
+	"context"
 	"fmt"
 	"strings"
 	"time"
 )
 
 func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessResponse, error) {
+	key := fmt.Sprintf("used_token:%s", data.Access)
+
+	exists, err := as.redis.Exists(context.Background(), key).Result()
+	if exists == 1 {
+		return nil, fmt.Errorf("Blocked token")
+	}
 
 	// валидный ли access токен?
 	if !tools.ValidToken(data.Access, as.cfg.SecretKey) {
