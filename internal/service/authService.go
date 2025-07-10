@@ -5,6 +5,8 @@ import (
 	userdb "auth/internal/DB/userDB"
 	"auth/internal/config"
 	"auth/internal/schemes"
+
+	"github.com/redis/go-redis/v9"
 )
 
 type AuthServiceI interface {
@@ -14,11 +16,12 @@ type AuthServiceI interface {
 
 type authService struct {
 	repo   db.AuthDBI
+	redis  *redis.Client
 	userdb userdb.UserDBI
 	cfg    *config.ConfigJWTToken
 	smtp   *config.ConfigSMTP
 }
 
-func NewAuthService(repo db.AuthDBI, userdb userdb.UserDBI, cfg *config.ConfigJWTToken, smtp *config.ConfigSMTP) AuthServiceI {
-	return &authService{repo, userdb, cfg, smtp}
+func NewAuthService(repo db.AuthDBI, redis *redis.Client, userdb userdb.UserDBI, cfg *config.ConfigJWTToken, smtp *config.ConfigSMTP) AuthServiceI {
+	return &authService{repo, redis, userdb, cfg, smtp}
 }

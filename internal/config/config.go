@@ -22,6 +22,13 @@ type ConfigDatabase struct {
 	Port string `env:"DB_PORT"`
 }
 
+type ConfigRedis struct {
+	Host string `env:"REDIS_HOST"`
+	Port int    `env:"REDIS_PORT"`
+	Pass string `env:"REDIS_PASS"`
+	Name int    `env:"REDIS_NAME"`
+}
+
 type ConfigLogger struct {
 	APIlp   string `env:"APILOGFILENAME"`
 	DBlp    string `env:"DBLOGFILENAME"`
@@ -46,12 +53,18 @@ type ConfigSMTP struct {
 	SmtpPort string `env:"SMTPPORT"`
 }
 
+type ConfigWebhook struct {
+	WBURL string `env:"WEBHOOKURL"`
+}
+
 type Config struct {
 	HTTPServer *ConfigHTTPServer
 	Db         *ConfigDatabase
+	Redis      *ConfigRedis
 	Logger     *ConfigLogger
 	JWT        *ConfigJWTToken
 	SMTP       *ConfigSMTP
+	WBhook     *ConfigWebhook
 }
 
 func MustLoad() *Config {
@@ -59,15 +72,20 @@ func MustLoad() *Config {
 
 	var cfgHttpServer ConfigHTTPServer
 	var cfgDatabase ConfigDatabase
+	var cfgRedis ConfigRedis
 	var cgfLogger ConfigLogger
 	var cfgJWT ConfigJWTToken
 	var cfgSMTP ConfigSMTP
+	var cfgWebhook ConfigWebhook
 
 	if err := cleanenv.ReadEnv(&cfgHttpServer); err != nil {
 		log.Fatalln("Ошибка чтения настроек сервера из .env файлы")
 	}
 	if err := cleanenv.ReadEnv(&cfgDatabase); err != nil {
 		log.Fatalln("Ошибка чтения настроек бд из .env файлы")
+	}
+	if err := cleanenv.ReadEnv(&cfgRedis); err != nil {
+		log.Fatalln("Ошибка чтения настроек redis из .env файла")
 	}
 	if err := cleanenv.ReadEnv(&cgfLogger); err != nil {
 		log.Fatalln("Ошибка чтения настроек логгеров из .env файлы")
@@ -77,6 +95,9 @@ func MustLoad() *Config {
 	}
 	if err := cleanenv.ReadEnv(&cfgSMTP); err != nil {
 		log.Fatalln("Ошибка чтения настроек smtp из .env файлы")
+	}
+	if err := cleanenv.ReadEnv(&cfgWebhook); err != nil {
+		log.Fatalln("Ошибка чтения настроек webhook из .env файлы")
 	}
 
 	accessDuration, err := time.ParseDuration(os.Getenv("ACCESS_TOKEN_LIFETIME"))
@@ -92,5 +113,5 @@ func MustLoad() *Config {
 	cfgJWT.Atl = accessDuration
 	cfgJWT.Rtl = refreshDuration
 
-	return &Config{&cfgHttpServer, &cfgDatabase, &cgfLogger, &cfgJWT, &cfgSMTP}
+	return &Config{&cfgHttpServer, &cfgDatabase, &cfgRedis, &cgfLogger, &cfgJWT, &cfgSMTP, &cfgWebhook}
 }

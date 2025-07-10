@@ -32,7 +32,7 @@ func Start() {
 
 	db := checkUpDB(dblogger)
 
-	container := container.NewContainer(db, cfg.JWT, cfg.SMTP)
+	container := container.NewContainer(db, cfg.Redis, cfg.JWT, cfg.SMTP)
 
 	server := http.NewHTTPServer(cfg.HTTPServer.Host, cfg.HTTPServer.Port, container, apilogger)
 

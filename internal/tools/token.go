@@ -12,6 +12,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type Header struct {
@@ -64,11 +65,20 @@ func GetHmacSha512(data string, sk string) string {
 	return sign
 }
 
+func GetBase64Token(data []byte) string {
+	return base64.StdEncoding.EncodeToString(data)
+}
+
 func GetRefreshToken() string {
 	return GetBase64Token([]byte(uuid.NewString()))
 }
-func GetBase64Token(data []byte) string {
-	return base64.StdEncoding.EncodeToString(data)
+
+func GetBcryptHash(data string) (string, error) {
+	hashed, err := bcrypt.GenerateFromPassword([]byte(data), bcrypt.DefaultCost)
+	if err != nil {
+		return "", err
+	}
+	return string(hashed), nil
 }
 
 func GetTokenPayload(block string) (*Payload, bool) {

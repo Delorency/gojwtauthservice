@@ -10,7 +10,7 @@ import (
 )
 
 func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessResponse, error) {
-	obj, f, err := as.repo.AuthorizedUserAgent(data.UserID, data.Ip)
+	obj, f, err := as.repo.GetByUserIDAndIP(data.UserID, data.Ip)
 
 	if err != nil {
 		return nil, err
@@ -25,7 +25,15 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 
 		data.Jti = uuid.NewString()
 		data.ExpiredAt = time.Now().Add(as.cfg.Rtl)
-		data.Refresh = tools.GetRefreshToken()
+
+		refreshtoken := tools.GetRefreshToken()
+
+		bcrypthash, err := tools.GetBcryptHash(refreshtoken)
+		if err != nil {
+			return nil, err
+		}
+
+		data.Refresh = bcrypthash
 
 		err = as.repo.Create(data)
 		if err != nil {
@@ -38,7 +46,7 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 		}
 		return &schemes.AccessResponse{
 			AccessToken:  access,
-			RefreshToken: data.Refresh,
+			RefreshToken: refreshtoken,
 		}, nil
 	}
 
@@ -46,7 +54,15 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 		obj.TokenVersion = obj.User.TokenVersion
 		obj.Jti = uuid.NewString()
 		obj.ExpiredAt = time.Now().Add(as.cfg.Rtl)
-		obj.Refresh = tools.GetRefreshToken()
+
+		refreshtoken := tools.GetRefreshToken()
+
+		bcrypthash, err := tools.GetBcryptHash(refreshtoken)
+		if err != nil {
+			return nil, err
+		}
+
+		obj.Refresh = bcrypthash
 
 		err = as.repo.Update(obj)
 		if err != nil {
@@ -60,7 +76,7 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 
 		return &schemes.AccessResponse{
 			AccessToken:  access,
-			RefreshToken: obj.Refresh,
+			RefreshToken: refreshtoken,
 		}, nil
 	}
 

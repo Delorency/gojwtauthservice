@@ -30,7 +30,12 @@ func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessRes
 		)
 	}
 
-	obj, err := as.repo.AuthorizedUserToken(data.Refresh)
+	bcrypthash, err := tools.GetBcryptHash(data.Refresh)
+	if err != nil {
+		return nil, err
+	}
+
+	obj, err := as.repo.GetByToken(bcrypthash)
 
 	if err != nil {
 		return nil, err
