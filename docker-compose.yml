@@ -12,16 +12,25 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
+  redis:
+    image: redis:7.2-alpine
+    restart: always
+    container_name: redis
+    ports:
+      - "${DOCKER_HOST_REDIS_PORT}:${REDIS_PORT}"
+
   app:
     build: .
     restart: always
     container_name: authservice
     depends_on:
       - db
+      - redis
     env_file:
       - ./configs/.env
     environment:
       DB_HOST: db
+      REDIS_HOST: redis
     ports:
       - "${DOCKER_HOST_PORT}:${PORT}"
     volumes:
