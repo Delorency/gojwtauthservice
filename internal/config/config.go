@@ -23,10 +23,11 @@ type ConfigDatabase struct {
 }
 
 type ConfigRedis struct {
-	Host string `env:"REDIS_HOST"`
-	Port int    `env:"REDIS_PORT"`
-	Pass string `env:"REDIS_PASS"`
-	Name int    `env:"REDIS_NAME"`
+	Host     string `env:"REDIS_HOST"`
+	Port     int    `env:"REDIS_PORT"`
+	Username string `env:"REDIS_USERNAME"`
+	Pass     string `env:"REDIS_PASS"`
+	DB       int    `env:"REDIS_DB"`
 }
 
 type ConfigLogger struct {
@@ -44,13 +45,6 @@ type ConfigJWTToken struct {
 
 	Atl time.Duration
 	Rtl time.Duration
-}
-
-type ConfigSMTP struct {
-	SmtpFrom string `env:"EMAIL_FROM"`
-	SmtpPass string `env:"EMAIL_PASS"`
-	SmtpHost string `env:"SMTPHOST"`
-	SmtpPort string `env:"SMTPPORT"`
 }
 
 type ConfigWebhook struct {

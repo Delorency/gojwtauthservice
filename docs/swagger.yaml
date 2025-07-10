@@ -6,6 +6,11 @@ definitions:
       refresh_token:
         type: string
     type: object
+  swagger.SwaggerMeResponse:
+    properties:
+      guid:
+        type: integer
+    type: object
   swagger.SwaggerNewError:
     properties:
       error:
@@ -46,18 +51,70 @@ paths:
         "200":
           description: OK
           schema:
-            items:
-              $ref: '#/definitions/swagger.SwaggerAccessResponse'
-            type: array
+            $ref: '#/definitions/swagger.SwaggerAccessResponse'
         "400":
           description: Ошибка создания токена
           schema:
             $ref: '#/definitions/swagger.SwaggerNewError'
         "500":
-          description: Ошибка парсинга IP
+          description: Ошибка парсинга UserAgent
           schema:
             $ref: '#/definitions/swagger.SwaggerNewError'
       summary: Получить пару access, refresh токенов
+      tags:
+      - Auth
+  /logout:
+    post:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Успешно
+        "400":
+          description: Ошибка
+          schema:
+            $ref: '#/definitions/swagger.SwaggerNewError'
+        "401":
+          description: Валидный токен не найден
+          schema:
+            $ref: '#/definitions/swagger.SwaggerNewError'
+        "500":
+          description: Ошибка парсинга UserAgent
+          schema:
+            $ref: '#/definitions/swagger.SwaggerNewError'
+      security:
+      - BearerAuth: []
+      summary: Осуществить logout по access токену
+      tags:
+      - Auth
+  /me:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/swagger.SwaggerMeResponse'
+        "400":
+          description: Неверный токен
+          schema:
+            $ref: '#/definitions/swagger.SwaggerNewError'
+        "401":
+          description: Валидный токен не найден
+          schema:
+            $ref: '#/definitions/swagger.SwaggerNewError'
+        "500":
+          description: Ошибка парсинга UserAgent
+          schema:
+            $ref: '#/definitions/swagger.SwaggerNewError'
+      security:
+      - BearerAuth: []
+      summary: Получение guid текущего пользователя
       tags:
       - Auth
   /refresh:
@@ -87,7 +144,7 @@ paths:
           schema:
             $ref: '#/definitions/swagger.SwaggerNewError'
         "500":
-          description: Ошибка парсинга тела запроса
+          description: Ошибка парсинга UserAgent
           schema:
             $ref: '#/definitions/swagger.SwaggerNewError'
       security:

@@ -35,8 +35,9 @@ func Start() {
 
 	rdb := redis.NewClient(&redis.Options{
 		Addr:     fmt.Sprintf("%s:%d", cfg.Redis.Host, cfg.Redis.Port),
+		Username: cfg.Redis.Username,
 		Password: cfg.Redis.Pass,
-		DB:       cfg.Redis.Name,
+		DB:       cfg.Redis.DB,
 	})
 
 	container := container.NewContainer(db, rdb, cfg.JWT, cfg.WBhook)

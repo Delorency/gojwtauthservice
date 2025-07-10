@@ -5,18 +5,17 @@ import (
 	"auth/internal/tools"
 	"context"
 	"fmt"
+	"log"
 	"strings"
 	"time"
 )
 
 func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessResponse, error) {
 	key := fmt.Sprintf("used_token:%s", data.Access)
-
 	exists, err := as.redis.Exists(context.Background(), key).Result()
 	if exists == 1 {
 		return nil, fmt.Errorf("Blocked token")
 	}
-
 	// валидный ли access токен?
 	if !tools.ValidToken(data.Access, as.cfg.SecretKey) {
 		return nil, fmt.Errorf("")
@@ -45,7 +44,7 @@ func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessRes
 	if err != nil {
 		return nil, err
 	}
-
+	fmt.Println(4)
 	obj, err := as.repo.GetByToken(bcrypthash)
 
 	if err != nil {
@@ -70,6 +69,11 @@ func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessRes
 	access, err := tools.GetJWTToken(as.cfg, obj.UserID, obj.Jti, obj.Ip, obj.UserAgent, obj.User.Email)
 	if err != nil {
 		return nil, err
+	}
+
+	err = as.redis.Set(context.Background(), key, "1", as.cfg.Atl).Err()
+	if err != nil {
+		log.Println("Send to redis error")
 	}
 
 	return &schemes.AccessResponse{

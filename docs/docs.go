@@ -40,10 +40,7 @@ const docTemplate = `{
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/swagger.SwaggerAccessResponse"
-                            }
+                            "$ref": "#/definitions/swagger.SwaggerAccessResponse"
                         }
                     },
                     "400": {
@@ -53,7 +50,94 @@ const docTemplate = `{
                         }
                     },
                     "500": {
-                        "description": "Ошибка парсинга IP",
+                        "description": "Ошибка парсинга UserAgent",
+                        "schema": {
+                            "$ref": "#/definitions/swagger.SwaggerNewError"
+                        }
+                    }
+                }
+            }
+        },
+        "/logout": {
+            "post": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Осуществить logout по access токену",
+                "responses": {
+                    "204": {
+                        "description": "Успешно"
+                    },
+                    "400": {
+                        "description": "Ошибка",
+                        "schema": {
+                            "$ref": "#/definitions/swagger.SwaggerNewError"
+                        }
+                    },
+                    "401": {
+                        "description": "Валидный токен не найден",
+                        "schema": {
+                            "$ref": "#/definitions/swagger.SwaggerNewError"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка парсинга UserAgent",
+                        "schema": {
+                            "$ref": "#/definitions/swagger.SwaggerNewError"
+                        }
+                    }
+                }
+            }
+        },
+        "/me": {
+            "get": {
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Получение guid текущего пользователя",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/swagger.SwaggerMeResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Неверный токен",
+                        "schema": {
+                            "$ref": "#/definitions/swagger.SwaggerNewError"
+                        }
+                    },
+                    "401": {
+                        "description": "Валидный токен не найден",
+                        "schema": {
+                            "$ref": "#/definitions/swagger.SwaggerNewError"
+                        }
+                    },
+                    "500": {
+                        "description": "Ошибка парсинга UserAgent",
                         "schema": {
                             "$ref": "#/definitions/swagger.SwaggerNewError"
                         }
@@ -109,7 +193,7 @@ const docTemplate = `{
                         }
                     },
                     "500": {
-                        "description": "Ошибка парсинга тела запроса",
+                        "description": "Ошибка парсинга UserAgent",
                         "schema": {
                             "$ref": "#/definitions/swagger.SwaggerNewError"
                         }
@@ -127,6 +211,14 @@ const docTemplate = `{
                 },
                 "refresh_token": {
                     "type": "string"
+                }
+            }
+        },
+        "swagger.SwaggerMeResponse": {
+            "type": "object",
+            "properties": {
+                "guid": {
+                    "type": "integer"
                 }
             }
         },

@@ -44,6 +44,7 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 		if err != nil {
 			return nil, err
 		}
+
 		return &schemes.AccessResponse{
 			AccessToken:  access,
 			RefreshToken: refreshtoken,
