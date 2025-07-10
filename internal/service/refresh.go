@@ -21,13 +21,17 @@ func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessRes
 		return nil, fmt.Errorf("")
 	}
 
+	if payload.UserAgent != data.UserAgent {
+		ls := schemes.LogoutRequest{Access: data.Access, Ip: data.Ip, UserAgent: data.UserAgent}
+		err := as.Logout(&ls)
+		if err != nil {
+			return nil, fmt.Errorf("Logount error")
+		}
+		return nil, fmt.Errorf("Strange UserAgent")
+	}
+
 	if payload.Ip != data.Ip {
-		tools.SendMail(
-			payload.Email,
-			"Warning",
-			"Попытка вход/вход с IP: "+data.Ip,
-			as.smtp,
-		)
+		go tools.SendToWebhook(data.Ip, as.wburl.WBURL)
 	}
 
 	bcrypthash, err := tools.GetBcryptHash(data.Refresh)
@@ -56,7 +60,7 @@ func (as *authService) Refresh(data *schemes.RefreshRequest) (*schemes.AccessRes
 	}
 
 	// новый access токен
-	access, err := tools.GetJWTToken(as.cfg, obj.Jti, obj.Ip, obj.User.Email)
+	access, err := tools.GetJWTToken(as.cfg, obj.UserID, obj.Jti, obj.Ip, obj.UserAgent, obj.User.Email)
 	if err != nil {
 		return nil, err
 	}

@@ -12,6 +12,7 @@ import (
 	"log"
 
 	"github.com/google/uuid"
+	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 	gormlogger "gorm.io/gorm/logger"
 )
@@ -32,7 +33,13 @@ func Start() {
 
 	db := checkUpDB(dblogger)
 
-	container := container.NewContainer(db, cfg.Redis, cfg.JWT, cfg.SMTP)
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     fmt.Sprintf("%s:%d", cfg.Redis.Host, cfg.Redis.Port),
+		Password: cfg.Redis.Pass,
+		DB:       cfg.Redis.Name,
+	})
+
+	container := container.NewContainer(db, rdb, cfg.JWT, cfg.WBhook)
 
 	server := http.NewHTTPServer(cfg.HTTPServer.Host, cfg.HTTPServer.Port, container, apilogger)
 

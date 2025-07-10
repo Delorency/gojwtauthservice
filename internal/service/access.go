@@ -10,7 +10,7 @@ import (
 )
 
 func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessResponse, error) {
-	obj, f, err := as.repo.GetByUserIDAndIP(data.UserID, data.Ip)
+	obj, f, err := as.repo.GetByUserIDIPUserAgent(data.UserID, data.Ip, data.UserAgent)
 
 	if err != nil {
 		return nil, err
@@ -40,7 +40,7 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 			return nil, err
 		}
 
-		access, err := tools.GetJWTToken(as.cfg, data.Jti, data.Ip, user.Email)
+		access, err := tools.GetJWTToken(as.cfg, data.UserID, data.Jti, data.Ip, data.UserAgent, user.Email)
 		if err != nil {
 			return nil, err
 		}
@@ -69,7 +69,7 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 			return nil, err
 		}
 
-		access, err := tools.GetJWTToken(as.cfg, data.Jti, data.Ip, obj.User.Email)
+		access, err := tools.GetJWTToken(as.cfg, data.UserID, data.Jti, data.Ip, data.UserAgent, obj.User.Email)
 		if err != nil {
 			return nil, err
 		}

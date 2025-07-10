@@ -12,6 +12,8 @@ import (
 type AuthServiceI interface {
 	Access(*schemes.AccessCreate) (*schemes.AccessResponse, error)
 	Refresh(*schemes.RefreshRequest) (*schemes.AccessResponse, error)
+	Logout(*schemes.LogoutRequest) error
+	Me(data *schemes.MeRequest) (uint, error)
 }
 
 type authService struct {
@@ -19,9 +21,9 @@ type authService struct {
 	redis  *redis.Client
 	userdb userdb.UserDBI
 	cfg    *config.ConfigJWTToken
-	smtp   *config.ConfigSMTP
+	wburl  *config.ConfigWebhook
 }
 
-func NewAuthService(repo db.AuthDBI, redis *redis.Client, userdb userdb.UserDBI, cfg *config.ConfigJWTToken, smtp *config.ConfigSMTP) AuthServiceI {
-	return &authService{repo, redis, userdb, cfg, smtp}
+func NewAuthService(repo db.AuthDBI, redis *redis.Client, userdb userdb.UserDBI, cfg *config.ConfigJWTToken, webhook *config.ConfigWebhook) AuthServiceI {
+	return &authService{repo, redis, userdb, cfg, webhook}
 }

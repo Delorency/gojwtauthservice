@@ -9,6 +9,8 @@ import (
 type AuthHandlerI interface {
 	Access(w http.ResponseWriter, r *http.Request)
 	Refresh(w http.ResponseWriter, r *http.Request)
+	Logout(w http.ResponseWriter, r *http.Request)
+	Me(w http.ResponseWriter, r *http.Request)
 }
 
 type authHandler struct {

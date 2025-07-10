@@ -15,6 +15,7 @@ type AccessCreate struct {
 	Refresh      string
 	ExpiredAt    time.Time
 	Ip           string
+	UserAgent    string
 	UserID       uint
 	TokenVersion string
 }
@@ -25,7 +26,28 @@ type AccessResponse struct {
 }
 
 type RefreshRequest struct {
-	Refresh string `json:"refresh" validate:"required"`
-	Access  string
-	Ip      string
+	Refresh   string `json:"refresh" validate:"required"`
+	Access    string
+	Ip        string
+	UserAgent string
+}
+
+type MeRequest struct {
+	Access    string
+	Ip        string
+	UserAgent string
+}
+
+type MeResponse struct {
+	Guid uint `json:"guid"`
+}
+
+type LogoutRequest struct {
+	Access    string
+	Ip        string
+	UserAgent string
+}
+
+type WebhookPayload struct {
+	Message string `json:"message"`
 }

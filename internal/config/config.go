@@ -63,7 +63,6 @@ type Config struct {
 	Redis      *ConfigRedis
 	Logger     *ConfigLogger
 	JWT        *ConfigJWTToken
-	SMTP       *ConfigSMTP
 	WBhook     *ConfigWebhook
 }
 
@@ -75,7 +74,6 @@ func MustLoad() *Config {
 	var cfgRedis ConfigRedis
 	var cgfLogger ConfigLogger
 	var cfgJWT ConfigJWTToken
-	var cfgSMTP ConfigSMTP
 	var cfgWebhook ConfigWebhook
 
 	if err := cleanenv.ReadEnv(&cfgHttpServer); err != nil {
@@ -92,9 +90,6 @@ func MustLoad() *Config {
 	}
 	if err := cleanenv.ReadEnv(&cfgJWT); err != nil {
 		log.Fatalln("Ошибка чтения настроек jwt токена из .env файлы")
-	}
-	if err := cleanenv.ReadEnv(&cfgSMTP); err != nil {
-		log.Fatalln("Ошибка чтения настроек smtp из .env файлы")
 	}
 	if err := cleanenv.ReadEnv(&cfgWebhook); err != nil {
 		log.Fatalln("Ошибка чтения настроек webhook из .env файлы")
@@ -113,5 +108,5 @@ func MustLoad() *Config {
 	cfgJWT.Atl = accessDuration
 	cfgJWT.Rtl = refreshDuration
 
-	return &Config{&cfgHttpServer, &cfgDatabase, &cfgRedis, &cgfLogger, &cfgJWT, &cfgSMTP, &cfgWebhook}
+	return &Config{&cfgHttpServer, &cfgDatabase, &cfgRedis, &cgfLogger, &cfgJWT, &cfgWebhook}
 }

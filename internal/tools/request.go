@@ -17,6 +17,14 @@ func GetIp(r *http.Request) (string, error) {
 
 	return ip, nil
 }
+func GetUserAgent(r *http.Request) (string, error) {
+	userAgent := r.Header.Get("User-Agent")
+	if userAgent == "" {
+		return "", nil
+	}
+
+	return userAgent, nil
+}
 func GetTokenFromHeader(r *http.Request) (string, error) {
 	authHeader := r.Header.Get("Authorization")
 	if authHeader == "" {

@@ -9,10 +9,11 @@ import (
 )
 
 type AuthDBI interface {
-	GetByUserIDAndIP(uint, string) (*models.RefreshToken, bool, error)
+	GetByUserIDIPUserAgent(uint, string, string) (*models.RefreshToken, bool, error)
 	GetByToken(string) (*models.RefreshToken, error)
 	Create(*schemes.AccessCreate) error
 	Update(*models.RefreshToken) error
+	Delete(uint) error
 }
 
 type authDB struct {

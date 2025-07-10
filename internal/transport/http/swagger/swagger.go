@@ -14,3 +14,6 @@ type SwaggerNewError struct {
 type SwaggerRefreshRequest struct {
 	Refresh string `json:"refresh" validate:"required"`
 }
+type SwaggerMeResponse struct {
+	Guid uint `json:"guid"`
+}

@@ -12,6 +12,7 @@ type RefreshToken struct {
 	Refresh      string `gorm:"size:128"`
 	ExpiredAt    time.Time
 	Ip           string `gorm:"size:64"`
+	UserAgent    string `gorm:"size:128"`
 	TokenVersion string `gorm:"size:128"`
 
 	UserID uint

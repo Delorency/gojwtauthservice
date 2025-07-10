@@ -30,6 +30,7 @@ var _ = sw.SwaggerAccessResponse{}
 // @Failure 400 {object} swagger.SwaggerNewError "Ошибка обновления токена"
 // @Failure 500 {object} swagger.SwaggerNewError "Ошибка парсинга IP"
 // @Failure 500 {object} swagger.SwaggerNewError "Ошибка парсинга тела запроса"
+// @Failure 500 {object} swagger.SwaggerNewError "Ошибка парсинга UserAgent"
 // @Router  /refresh [post]
 func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 	token, err := tools.GetTokenFromHeader(r)
@@ -76,8 +77,19 @@ func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 		ah.logger.Println(l.GetLogEntry(r, http.StatusInternalServerError, bodyBytes))
 		return
 	}
+	useragent, err := tools.GetUserAgent(r)
+	if err != nil {
+		response.NewResponse(
+			e.NewError("Ошибка парсинга UserAgent"),
+			http.StatusInternalServerError,
+			w,
+		)
+		ah.logger.Println(l.GetLogEntry(r, http.StatusInternalServerError, []byte{}))
+		return
+	}
 
 	req.Ip = ip
+	req.UserAgent = useragent
 
 	req.Access = token
 

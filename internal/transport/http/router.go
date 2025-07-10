@@ -31,5 +31,7 @@ func NewRouter(cont *container.Container, logger *log.Logger) *chi.Mux {
 
 	router.Post("/refresh", handlers.Refresh)
 
+	router.Post("/logout", handlers.Logout)
+
 	return router
 }
