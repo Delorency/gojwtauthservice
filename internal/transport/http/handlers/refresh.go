@@ -96,7 +96,7 @@ func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 	ar, err := ah.service.Refresh(&req)
 	if err != nil {
 		response.NewResponse(
-			e.NewError("Ошибка обновления токена"),
+			e.NewError(err.Error()),
 			http.StatusBadRequest,
 			w,
 		)

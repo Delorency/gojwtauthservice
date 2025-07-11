@@ -52,7 +52,7 @@ func (as *authService) Logout(data *schemes.LogoutRequest) error {
 
 	// jti refresh токена == jti access токена
 	if payload.Jti != obj.Jti {
-		return fmt.Errorf("Токены не в паре")
+		return fmt.Errorf("Неверный токен")
 	}
 
 	// удаляем текущую сессию

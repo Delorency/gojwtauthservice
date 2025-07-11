@@ -19,7 +19,7 @@ var _ = sw.SwaggerAccessResponse{}
 // @tags Auth
 // @Accept  json
 // @Produce json
-// @Param   guid          path int   true "Идентификатор пользователя"
+// @Param   guid path int   true "Идентификатор пользователя"
 // @Success 200 {object} swagger.SwaggerAccessResponse
 // @Failure 400 {object} swagger.SwaggerNewError "guid должно быть числом > 0"
 // @Failure 400 {object} swagger.SwaggerNewError "Ошибка создания токена"

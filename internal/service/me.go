@@ -13,6 +13,7 @@ func (as *authService) Me(data *schemes.MeRequest) (uint, error) {
 	key := fmt.Sprintf("used_token:%s", data.Access)
 	exists, err := as.redis.Exists(context.Background(), key).Result()
 	if err != nil {
+		fmt.Println(err.Error())
 		log.Println("Check key existence error")
 	}
 	if exists == 1 {

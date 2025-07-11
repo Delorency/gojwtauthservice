@@ -10,9 +10,11 @@ import (
 func GetIp(r *http.Request) (string, error) {
 	ip := r.Header.Get("X-Forwarded-For")
 	if ip == "" {
-		ip, _, _ := net.SplitHostPort(r.RemoteAddr)
+		ip, _, err := net.SplitHostPort(r.RemoteAddr)
 
-		return ip, fmt.Errorf("Ошибка парсинга IP")
+		if err != nil {
+			return ip, fmt.Errorf("Ошибка парсинга IP")
+		}
 	}
 
 	return ip, nil

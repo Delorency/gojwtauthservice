@@ -80,7 +80,7 @@ const docTemplate = `{
                         "description": "Успешно"
                     },
                     "400": {
-                        "description": "Ошибка",
+                        "description": "Ошибка выхода",
                         "schema": {
                             "$ref": "#/definitions/swagger.SwaggerNewError"
                         }

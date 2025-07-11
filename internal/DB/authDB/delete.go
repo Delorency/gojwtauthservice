@@ -14,5 +14,5 @@ func (ad *authDB) Delete(id uint) error {
 			return err
 		}
 	}
-	return ad.db.Delete(&obj).Error
+	return ad.db.Unscoped().Where("id = ?", id).Delete(&models.RefreshToken{}).Error
 }
