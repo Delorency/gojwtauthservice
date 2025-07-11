@@ -17,11 +17,10 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 	}
 
 	if !f {
-		user, err := as.userdb.GetUserById(data.UserID)
+		_, err := as.userdb.GetUserById(data.UserID)
 		if err != nil {
 			return nil, err
 		}
-		data.TokenVersion = user.TokenVersion
 
 		data.Jti = uuid.NewString()
 		data.ExpiredAt = time.Now().Add(as.cfg.Rtl)
@@ -40,7 +39,7 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 			return nil, err
 		}
 
-		access, err := tools.GetJWTToken(as.cfg, data.UserID, data.Jti, data.Ip, data.UserAgent, user.Email)
+		access, err := tools.GetJWTToken(as.cfg, data.UserID, data.Jti, data.Ip, data.UserAgent)
 		if err != nil {
 			return nil, err
 		}
@@ -51,8 +50,7 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 		}, nil
 	}
 
-	if obj.TokenVersion != obj.User.TokenVersion || time.Now().After(obj.ExpiredAt) {
-		obj.TokenVersion = obj.User.TokenVersion
+	if time.Now().After(obj.ExpiredAt) {
 		obj.Jti = uuid.NewString()
 		obj.ExpiredAt = time.Now().Add(as.cfg.Rtl)
 
@@ -70,7 +68,7 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 			return nil, err
 		}
 
-		access, err := tools.GetJWTToken(as.cfg, data.UserID, data.Jti, data.Ip, data.UserAgent, obj.User.Email)
+		access, err := tools.GetJWTToken(as.cfg, data.UserID, data.Jti, data.Ip, data.UserAgent)
 		if err != nil {
 			return nil, err
 		}
@@ -81,5 +79,5 @@ func (as *authService) Access(data *schemes.AccessCreate) (*schemes.AccessRespon
 		}, nil
 	}
 
-	return nil, fmt.Errorf("")
+	return nil, fmt.Errorf("Вход уже выполнен")
 }

@@ -10,9 +10,9 @@ import (
 func GetIp(r *http.Request) (string, error) {
 	ip := r.Header.Get("X-Forwarded-For")
 	if ip == "" {
-		ip, _, err := net.SplitHostPort(r.RemoteAddr)
+		ip, _, _ := net.SplitHostPort(r.RemoteAddr)
 
-		return ip, err
+		return ip, fmt.Errorf("Ошибка парсинга IP")
 	}
 
 	return ip, nil
@@ -20,7 +20,7 @@ func GetIp(r *http.Request) (string, error) {
 func GetUserAgent(r *http.Request) (string, error) {
 	userAgent := r.Header.Get("User-Agent")
 	if userAgent == "" {
-		return "", nil
+		return "", fmt.Errorf("Ошибка парсинга User-Agent")
 	}
 
 	return userAgent, nil
@@ -28,17 +28,17 @@ func GetUserAgent(r *http.Request) (string, error) {
 func GetTokenFromHeader(r *http.Request) (string, error) {
 	authHeader := r.Header.Get("Authorization")
 	if authHeader == "" {
-		return "", fmt.Errorf("Authorization header missing")
+		return "", fmt.Errorf("Токен не найден")
 	}
 
 	const prefix = "Bearer "
 	if !strings.HasPrefix(authHeader, prefix) {
-		return "", fmt.Errorf("Invalid token format")
+		return "", fmt.Errorf("Неверный формат токена")
 	}
 
 	token := strings.TrimPrefix(authHeader, prefix)
 	if token == "" {
-		return "", fmt.Errorf("Token is empty")
+		return "", fmt.Errorf("Токен не найден")
 	}
 
 	return token, nil

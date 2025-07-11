@@ -20,12 +20,3 @@ func (ad *authDB) GetByUserIDIPUserAgent(userid uint, ip string, useragent strin
 	}
 	return &refreshdata, true, nil
 }
-
-func (ad *authDB) GetByToken(bcryptrefresh string) (*models.RefreshToken, error) {
-	var refreshdata models.RefreshToken
-	err := ad.db.Where("refresh = ?", bcryptrefresh).Preload("User").First(&refreshdata).Error
-	if err != nil {
-		return nil, err
-	}
-	return &refreshdata, nil
-}

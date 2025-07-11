@@ -11,13 +11,12 @@ func init() {
 }
 
 type AccessCreate struct {
-	Jti          string
-	Refresh      string
-	ExpiredAt    time.Time
-	Ip           string
-	UserAgent    string
-	UserID       uint
-	TokenVersion string
+	Jti       string
+	Refresh   string
+	ExpiredAt time.Time
+	Ip        string
+	UserAgent string
+	UserID    uint
 }
 
 type AccessResponse struct {

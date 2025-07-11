@@ -24,22 +24,21 @@ type Payload struct {
 	Jti       string
 	Iat       int64
 	Exp       int64
-	Id        uint
+	UserID    uint
 	Ip        string
 	UserAgent string
-	Email     string
 }
 
-func GetJWTToken(cfg *config.ConfigJWTToken, id uint, jti, ip, useragent, email string) (string, error) {
+func GetJWTToken(cfg *config.ConfigJWTToken, id uint, jti, ip, useragent string) (string, error) {
 	header := Header{Type: cfg.Typ, Alg: cfg.Alg}
 	payload := Payload{
 		Iss:       cfg.Iss,
 		Iat:       time.Now().Unix(),
 		Exp:       time.Now().Add(cfg.Atl).Unix(),
 		Jti:       jti,
+		UserID:    id,
 		Ip:        ip,
 		UserAgent: useragent,
-		Email:     email,
 	}
 
 	header_byte, err := json.Marshal(header)
@@ -83,6 +82,10 @@ func GetBcryptHash(data string) (string, error) {
 		return "", err
 	}
 	return string(hashed), nil
+}
+func CheckBcryptHash(refreshToken, bcryptHash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(bcryptHash), []byte(refreshToken))
+	return err == nil
 }
 
 func GetTokenPayload(block string) (*Payload, bool) {

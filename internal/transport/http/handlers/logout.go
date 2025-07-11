@@ -19,7 +19,7 @@ var _ = sw.SwaggerAccessResponse{}
 // @Produce json
 // @Success 204 "Успешно"
 // @Failure 401 {object} swagger.SwaggerNewError "Валидный токен не найден"
-// @Failure 400 {object} swagger.SwaggerNewError "Ошибка"
+// @Failure 400 {object} swagger.SwaggerNewError "Ошибка выхода"
 // @Failure 500 {object} swagger.SwaggerNewError "Ошибка парсинга IP"
 // @Failure 500 {object} swagger.SwaggerNewError "Ошибка парсинга UserAgent"
 // @Router  /logout [post]
@@ -41,7 +41,7 @@ func (ah *authHandler) Logout(w http.ResponseWriter, r *http.Request) {
 	ip, err := tools.GetIp(r)
 	if err != nil {
 		response.NewResponse(
-			e.NewError("Ошибка парсинга IP"),
+			e.NewError(err.Error()),
 			http.StatusInternalServerError,
 			w,
 		)
@@ -51,7 +51,7 @@ func (ah *authHandler) Logout(w http.ResponseWriter, r *http.Request) {
 	useragent, err := tools.GetUserAgent(r)
 	if err != nil {
 		response.NewResponse(
-			e.NewError("Ошибка парсинга UserAgent"),
+			e.NewError(err.Error()),
 			http.StatusInternalServerError,
 			w,
 		)
@@ -65,7 +65,7 @@ func (ah *authHandler) Logout(w http.ResponseWriter, r *http.Request) {
 	err = ah.service.Logout(&req)
 	if err != nil {
 		response.NewResponse(
-			e.NewError("Ошибка"),
+			e.NewError(err.Error()),
 			http.StatusBadRequest,
 			w,
 		)

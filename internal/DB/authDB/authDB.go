@@ -10,7 +10,6 @@ import (
 
 type AuthDBI interface {
 	GetByUserIDIPUserAgent(uint, string, string) (*models.RefreshToken, bool, error)
-	GetByToken(string) (*models.RefreshToken, error)
 	Create(*schemes.AccessCreate) error
 	Update(*models.RefreshToken) error
 	Delete(uint) error

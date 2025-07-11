@@ -11,7 +11,6 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/google/uuid"
 	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
 	gormlogger "gorm.io/gorm/logger"
@@ -64,9 +63,9 @@ func checkUpDB(logger gormlogger.Interface) *gorm.DB {
 }
 
 func CreateListTestUser(db *gorm.DB) {
-	u1 := &models.User{TokenVersion: uuid.NewString(), Email: "user1@gmail.com"}
-	u2 := &models.User{TokenVersion: uuid.NewString(), Email: "user2@gmail.com"}
-	u3 := &models.User{TokenVersion: uuid.NewString(), Email: "user3@gmail.com"}
+	u1 := &models.User{}
+	u2 := &models.User{}
+	u3 := &models.User{}
 	db.Create(u1)
 	db.Create(u2)
 	db.Create(u3)

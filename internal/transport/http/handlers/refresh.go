@@ -48,7 +48,7 @@ func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 
 	if err := json.Unmarshal(bodyBytes, &req); err != nil {
 		response.NewResponse(
-			e.NewError(""),
+			e.NewError("Необходимые поля не заполнены"),
 			http.StatusInternalServerError,
 			w,
 		)
@@ -70,7 +70,7 @@ func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 	ip, err := tools.GetIp(r)
 	if err != nil {
 		response.NewResponse(
-			e.NewError("Ошибка парсинга IP"),
+			e.NewError(err.Error()),
 			http.StatusInternalServerError,
 			w,
 		)
@@ -80,7 +80,7 @@ func (ah *authHandler) Refresh(w http.ResponseWriter, r *http.Request) {
 	useragent, err := tools.GetUserAgent(r)
 	if err != nil {
 		response.NewResponse(
-			e.NewError("Ошибка парсинга UserAgent"),
+			e.NewError(err.Error()),
 			http.StatusInternalServerError,
 			w,
 		)
