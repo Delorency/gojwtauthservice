@@ -5,11 +5,17 @@ import (
 	"auth/internal/container"
 	"auth/internal/logger"
 	"auth/internal/models"
-	"auth/internal/transport/http"
+	ht "auth/internal/transport/http"
 	"auth/storage"
 	"auth/storage/migrations"
+	"context"
 	"fmt"
 	"log"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/redis/go-redis/v9"
 	"gorm.io/gorm"
@@ -41,18 +47,39 @@ func Start() {
 
 	container := container.NewContainer(db, rdb, cfg.JWT, cfg.WBhook)
 
-	server := http.NewHTTPServer(cfg.HTTPServer.Host, cfg.HTTPServer.Port, container, apilogger)
-
-	apilogger.Printf("Set IP: %s:%s\n", cfg.HTTPServer.Host, cfg.HTTPServer.Port)
-	apilogger.Println("Starting server")
-
-	log.Printf("Server work on %s:%s\n", cfg.HTTPServer.Host, cfg.HTTPServer.Port)
+	server := ht.NewHTTPServer(cfg.HTTPServer.Host, cfg.HTTPServer.Port, container, apilogger)
 
 	CreateListTestUser(db) // создание тестовых пользователей
 
-	if err := server.ListenAndServe(); err != nil {
-		log.Fatalln(err)
+	ctx, cancel := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer cancel()
+
+	go func() {
+		apilogger.Printf("Set IP: %s:%s\n", cfg.HTTPServer.Host, cfg.HTTPServer.Port)
+		apilogger.Println("Starting server")
+
+		log.Printf("Server work on %s:%s\n", cfg.HTTPServer.Host, cfg.HTTPServer.Port)
+
+		if err := server.ListenAndServe(); err != http.ErrServerClosed {
+			log.Fatalf("Server error: %v\n", err)
+		}
+	}()
+
+	<-ctx.Done()
+
+	fmt.Println("Server is stopping...")
+
+	shtctx, shtcancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer shtcancel()
+
+	if err := server.Shutdown(shtctx); err != nil {
+		log.Printf("Graceful shutdown error: %v\n", err)
+
+		if err := server.Close(); err != nil {
+			log.Fatalf("Forced termination error: %v\n", err)
+		}
 	}
+
 }
 
 func checkUpDB(logger gormlogger.Interface) *gorm.DB {
